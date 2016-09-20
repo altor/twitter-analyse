@@ -2,3 +2,5 @@ PJE 2 - Analyse de comportement avec Twitter
 
 author: D'AZEMAR Arthur
 	EL GHARBI Norhane
+
+20/09: Création du dépôt GitLab
