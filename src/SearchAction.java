@@ -8,7 +8,6 @@ import javax.swing.JTextField;
 import twitter4j.Status;
 import twitter4j.TwitterException;
 
-
 public class SearchAction extends AbstractAction {
 	
 	private JTextField requestField;
@@ -20,7 +19,6 @@ public class SearchAction extends AbstractAction {
 		this.requestField = requestField;
 		this.twitterAPI = twitterAPI;
 		this.table = table;
-
 	}
 	
 	// Action réalisé après click sur le bouton "recherché"
