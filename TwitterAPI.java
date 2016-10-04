@@ -1,5 +1,3 @@
-package test_pje;
-
 import java.util.List;
 
 import twitter4j.Query;
@@ -9,7 +7,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-public class TwiterAPI {
+public class TwitterAPI {
 
 	private final static String consumerKey = "kZGG8qllB1U6nlQLmJ6E2pbZL";
 	private final static String consumerSecret = "NcczUUj3mQ9L1p1hLDVqOJHQFQ1vtWRcV2CFymNkPapAChZS17";
@@ -17,7 +15,8 @@ public class TwiterAPI {
 	private final static String accessTokenSecret = "sN5ekp6mmHaLopBpi8kAeZnhIPd8fW4udfPBINyagXBcO";	
 	private Twitter twitter;
 	
-	public TwiterAPI() {
+	// Connexion à Twitter
+	public TwitterAPI() {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true)
 		  .setOAuthConsumerKey(consumerKey)
@@ -31,7 +30,8 @@ public class TwiterAPI {
 		this.twitter = tf.getInstance();
 	}
 	
-	public List <Status> getTweet(String request) throws TwitterException{
+	// Renvoit la liste des tweets pour la requete request
+	public List<Status> getTweets(String request) throws TwitterException{
 		Query query = new Query(request);
 		return this.twitter.search(query).getTweets();
 	}
