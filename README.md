@@ -4,3 +4,8 @@ author: D'AZEMAR Arthur
 	EL GHARBI Norhane
 
 20/09: Création du dépôt GitLab
+
+# Dépendance
+
+- [twitter4J](http://twitter4j.org/en/index.html) 
+- [opencsv](https://sourceforge.net/projects/opencsv/)
