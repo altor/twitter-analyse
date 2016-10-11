@@ -1,7 +1,11 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
+
+import com.opencsv.CSVWriter;
 
 import twitter4j.Status;
 
@@ -16,6 +20,20 @@ public class TweetsTableModel extends AbstractTableModel {
 		this.tweetList = (ArrayList<Status>) tweetList;
 	} 
 	
+	public void toCSVFile(String fileName) throws IOException{
+		CSVWriter writer = new CSVWriter(new FileWriter(fileName), '\t');
+		for(Status tweet : tweetList){	
+			long id = tweet.getId();
+			String userName = tweet.getUser().getName();
+			String tweetText = tweet.getText();
+			java.util.Date tweetDate = tweet.getCreatedAt();
+			
+			String line[] = {Long.toString(id), userName, tweetText, tweetDate.toString()};
+			
+			writer.writeNext(line);
+		}
+		writer.close();
+	}
 	public int getColumnCount() {
 		return 2;
 	}
