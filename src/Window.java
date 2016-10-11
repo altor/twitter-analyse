@@ -32,14 +32,21 @@ public class Window extends JFrame {
 		this.setVisible(true);
 		
 	    this.setLayout(new GridLayout(9, 3));
-	    this.getContentPane().add(new JLabel("Rechercher"));
+	    //this.getContentPane().add(new JLabel("Rechercher"));
+	    
+	    
 	    
 	    JTextField jf = new JTextField();
 	    this.getContentPane().add(jf);
 
 	    this.getContentPane().add(new JButton(new SearchAction("Rechercher", jf, twitterAPI, table)));
+	    
+
+	    
 	    this.getContentPane().add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED), BorderLayout.CENTER);
 
+	    this.getContentPane().add(new JButton("Exporter les résultats en CSV"));
+	    
 	    this.setVisible(true);		
 	}
 	   
