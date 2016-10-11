@@ -24,35 +24,25 @@ public class Window extends JFrame {
 	private TweetsTable table;
 	
 	// Cree la fenêtre
-	public Window(TwitterAPI twitterAPI) {
+	public Window(TwitterAPI twitterAPI, TweetsTableModel tableTweets) {
 		super("Recherche Twitter");
-		this.table = new TweetsTable();
+		this.table = new TweetsTable(tableTweets);
 		this.setSize(500, 300);
-		
-	
 	    this.setLayout(new GridLayout(9, 3));
-	    //this.getContentPane().add(new JLabel("Rechercher"));
-	    
-	    
 	    
 	    JTextField jf = new JTextField();
-	    this.getContentPane().add(jf);
-
-	    this.getContentPane().add(new JButton(new SearchAction("Rechercher", jf, twitterAPI, table)));
 	    
+	    //this.getContentPane().add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED), BorderLayout.CENTER);
 
-	    
-	    this.getContentPane().add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED), BorderLayout.CENTER);
 
-	    this.getContentPane().add(new JButton("Exporter les résultats en CSV"));
 
-	    JTextField jf = new JTextField();
+	    //JTextField jf = new JTextField();
 		
 		JPanel researchContainer = new JPanel();
 		researchContainer.setLayout(new BoxLayout(researchContainer, BoxLayout.X_AXIS));
 		researchContainer.add(new JLabel("Rechercher"));
 		researchContainer.add(jf);
-		researchContainer.add(new JButton(new SearchAction("Rechercher", jf, twitterAPI, table)));
+		researchContainer.add(new JButton(new SearchAction("Rechercher", jf, twitterAPI, tableTweets)));
 		
 		Container frame = this.getContentPane();
 		frame.setLayout(new BoxLayout(frame, BoxLayout.PAGE_AXIS));
@@ -60,6 +50,8 @@ public class Window extends JFrame {
 	    frame.add(researchContainer);
    	    frame.add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED), BorderLayout.CENTER);
 
+	    this.getContentPane().add(new JButton(new ExportTweetsToCSVAction("Exporter les résultats en CSV", tableTweets)));
+   	    
 	    this.pack();
 	    this.setVisible(true);		
 	}

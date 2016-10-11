@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 import twitter4j.Query;
@@ -32,6 +33,10 @@ public class TwitterAPI {
 	
 	// Renvoit la liste des tweets pour la requete request
 	public List<Status> getTweets(String request) throws TwitterException{
+		/*Status s = twitter.updateStatus("First Tweet from within Java code @java,@twitter, @t4j_news");
+		List<Status> l = new ArrayList<Status>();
+		l.add(s);
+		return l;*/
 		Query query = new Query(request);
 		return this.twitter.search(query).getTweets();
 	}

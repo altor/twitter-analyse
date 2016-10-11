@@ -12,9 +12,9 @@ public class SearchAction extends AbstractAction {
 	
 	private JTextField requestField;
 	private TwitterAPI twitterAPI;
-	private TweetsTable table;
+	private TweetsTableModel table;
 
-	public SearchAction(String texte, JTextField requestField, TwitterAPI twitterAPI, TweetsTable table) {
+	public SearchAction(String texte, JTextField requestField, TwitterAPI twitterAPI, TweetsTableModel table) {
 		super(texte);
 		this.requestField = requestField;
 		this.twitterAPI = twitterAPI;
@@ -25,7 +25,7 @@ public class SearchAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			List<Status> listeDeTweet = this.twitterAPI.getTweets(this.requestField.getText());
-			table.updateTweets(listeDeTweet);
+			table.updateTableModel(listeDeTweet);
 		} catch (Exception e1) {
 			System.out.println(e1.getMessage());
 		}		

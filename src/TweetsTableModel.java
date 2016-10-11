@@ -16,9 +16,16 @@ public class TweetsTableModel extends AbstractTableModel {
 	
 	private final String[] columnName = {"User", "Text"};
 	
-	public TweetsTableModel(List<Status> tweetList){
-		this.tweetList = (ArrayList<Status>) tweetList;
+	
+	
+	public TweetsTableModel(){
+		super();
+		this.tweetList = new ArrayList<Status>();
 	} 
+	
+	public void updateTableModel(List<Status> listeDeTweet){
+		this.tweetList = (ArrayList<Status>) listeDeTweet;
+	}
 	
 	public void toCSVFile(String fileName) throws IOException{
 		CSVWriter writer = new CSVWriter(new FileWriter(fileName), '\t');
@@ -34,6 +41,7 @@ public class TweetsTableModel extends AbstractTableModel {
 		}
 		writer.close();
 	}
+	
 	public int getColumnCount() {
 		return 2;
 	}
