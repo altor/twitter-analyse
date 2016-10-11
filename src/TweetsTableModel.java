@@ -25,6 +25,7 @@ public class TweetsTableModel extends AbstractTableModel {
 	
 	public void updateTableModel(List<Status> listeDeTweet){
 		this.tweetList = (ArrayList<Status>) listeDeTweet;
+		fireTableDataChanged();
 	}
 	
 	public void toCSVFile(String fileName) throws IOException{

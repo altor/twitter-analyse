@@ -53,7 +53,7 @@ public class Window extends JFrame {
 	    this.getContentPane().add(new JButton(new ExportTweetsToCSVAction("Exporter les résultats en CSV", tableTweets)));
    	    
 	    this.pack();
-	    this.setVisible(true);		
+	    this.setVisible(true);
 	}
 	   
 
