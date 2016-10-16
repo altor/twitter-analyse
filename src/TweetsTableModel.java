@@ -1,3 +1,7 @@
+
+/**
+ * Model représentant la table des Tweets
+ */
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,60 +16,79 @@ import twitter4j.Status;
 // Permet de représenter la table des tweets
 public class TweetsTableModel extends AbstractTableModel {
 
-	protected ArrayList<Status> tweetList;
-	
-	private final String[] columnName = {"User", "Text"};
-	
-	
-	
-	public TweetsTableModel(){
+	// Liste des Tweets contenus dans la table des tweets
+	protected ArrayList<Tweet> tweetList;
+
+	private final String[] columnName = { "User", "Text", "Annotation" };
+
+	public TweetsTableModel() {
 		super();
-		this.tweetList = new ArrayList<Status>();
-	} 
-	
-	public void updateTableModel(List<Status> listeDeTweet){
-		this.tweetList = (ArrayList<Status>) listeDeTweet;
+		this.tweetList = new ArrayList<Tweet>();
+	}
+
+	/**
+	 * Met à jour la table des tweet avec une nouvelle liste de tweets
+	 * 
+	 * @param listeDeTweet
+	 *            la nouvelle liste de tweets
+	 */
+	public void updateTableModel(List<Tweet> listeDeTweet) {
+		this.tweetList = (ArrayList<Tweet>) listeDeTweet;
+
+		// Met à jour la vue
 		fireTableDataChanged();
 	}
-	
-	public void toCSVFile(String fileName) throws IOException{
+
+	public void toCSVFile(String fileName) throws IOException {
 		CSVWriter writer = new CSVWriter(new FileWriter(fileName), '\t');
-		for(Status tweet : tweetList){	
-			long id = tweet.getId();
-			String userName = tweet.getUser().getName();
-			String tweetText = tweet.getText();
-			java.util.Date tweetDate = tweet.getCreatedAt();
-			
-			String line[] = {Long.toString(id), userName, tweetText, tweetDate.toString()};
-			
-			writer.writeNext(line);
-		}
+		for (Tweet tweet : tweetList)
+			writer.writeNext(tweet.toCSVLine());
 		writer.close();
 	}
-	
-	public int getColumnCount() {
-		return 2;
+
+	private Tweet getNTweet(int n) {
+		return tweetList.get(n);
 	}
-	
+
+	// OVERIDED FUNCTIONS
+
+	public int getColumnCount() {
+		return 3;
+	}
+
 	public int getRowCount() {
 		return tweetList.size();
 	}
-	
+
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Status tweet = getNTweet(rowIndex);
-		if(columnIndex == 0)
-			return tweet.getUser().getScreenName();
-		if(columnIndex == 1)
-			return tweet.getText();
-		throw(new IllegalArgumentException());
+		Tweet tweet = getNTweet(rowIndex);
+		switch (columnIndex) {
+
+		case 0:
+			return tweet.getStatus().getUser().getScreenName();
+		case 1:
+			return tweet.getStatus().getText();
+		case 2:
+			return tweet.getAnnotation();
+		default:
+			throw (new IllegalArgumentException());
+		}
 	}
-	
-	public String getColumnName(int columnIndex){
+
+	public void setValueAt(Object annotation, int rowIndex, int columnIndex) {
+		if (columnIndex == 2)
+			tweetList.get(rowIndex).setAnnotation(Integer.parseInt((String) annotation));
+		else
+			throw (new IllegalArgumentException());
+	}
+
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+		if (columnIndex == 2)
+			return true;
+		return false;
+	}
+
+	public String getColumnName(int columnIndex) {
 		return this.columnName[columnIndex];
 	}
-	
-	private Status getNTweet(int n){
-		return tweetList.get(n);
-	}
-	
 }

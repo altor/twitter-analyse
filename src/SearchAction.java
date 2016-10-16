@@ -1,4 +1,8 @@
 
+/**
+ * Action réalisée après un clique sur le bouton "rechercher"
+ */
+
 import java.awt.event.ActionEvent;
 import java.util.List;
 
@@ -9,26 +13,25 @@ import twitter4j.Status;
 import twitter4j.TwitterException;
 
 public class SearchAction extends AbstractAction {
-	
+
 	private JTextField requestField;
 	private TwitterAPI twitterAPI;
-	private TweetsTableModel table;
+	private TweetsTableModel tweetsTableModel;
 
-	public SearchAction(String texte, JTextField requestField, TwitterAPI twitterAPI, TweetsTableModel table) {
+	public SearchAction(String texte, JTextField requestField, TwitterAPI twitterAPI,
+			TweetsTableModel tweetsTableModel) {
 		super(texte);
 		this.requestField = requestField;
 		this.twitterAPI = twitterAPI;
-		this.table = table;
-	}
-	
-	// Action réalisé après click sur le bouton "recherché"
-	public void actionPerformed(ActionEvent e) {
-		try {
-			List<Status> listeDeTweet = this.twitterAPI.getTweets(this.requestField.getText());
-			table.updateTableModel(listeDeTweet);
-		} catch (Exception e1) {
-			System.out.println(e1.getMessage());
-		}		
+		this.tweetsTableModel = tweetsTableModel;
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		try {
+			List<Tweet> tweetList = this.twitterAPI.getTweets(this.requestField.getText());
+			tweetsTableModel.updateTableModel(tweetList);
+		} catch (Exception e1) {
+			System.out.println(e1.getMessage());
+		}
+	}
 }

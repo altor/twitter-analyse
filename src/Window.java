@@ -1,7 +1,7 @@
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-//import java.util.HashMap;
 
+/**
+ * Fenêtre de l'interface graphique
+*/
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -20,41 +20,41 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Window extends JFrame {
-	
-	private TweetsTable table;
-	
-	// Cree la fenêtre
-	public Window(TwitterAPI twitterAPI, TweetsTableModel tableTweets) {
+
+	public Window(TwitterAPI twitterAPI, TweetsTableModel tweetsTableModel) {
+
+		// Informations générales
 		super("Recherche Twitter");
-		this.table = new TweetsTable(tableTweets);
 		this.setSize(500, 300);
-	    this.setLayout(new GridLayout(9, 3));
-	    
-	    JTextField jf = new JTextField();
-	    
-	    //this.getContentPane().add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED), BorderLayout.CENTER);
+		this.setLayout(new GridLayout(9, 3));
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-
-
-	    //JTextField jf = new JTextField();
-		
+		// Zone de Recherche
 		JPanel researchContainer = new JPanel();
 		researchContainer.setLayout(new BoxLayout(researchContainer, BoxLayout.X_AXIS));
 		researchContainer.add(new JLabel("Rechercher"));
+		JTextField jf = new JTextField();
 		researchContainer.add(jf);
-		researchContainer.add(new JButton(new SearchAction("Rechercher", jf, twitterAPI, tableTweets)));
-		
+		researchContainer.add(new JButton(new SearchAction("Rechercher", jf, twitterAPI, tweetsTableModel)));
+
+		// Zone d'affichage du tableau
+		TweetsTableView tweetstableView = new TweetsTableView(tweetsTableModel);
+		JScrollPane tableContainer = new JScrollPane(tweetstableView, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+		// Ajouts des différentes zones
 		Container frame = this.getContentPane();
 		frame.setLayout(new BoxLayout(frame, BoxLayout.PAGE_AXIS));
-		
-	    frame.add(researchContainer);
-   	    frame.add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED), BorderLayout.CENTER);
+		frame.add(researchContainer);
+		frame.add(tableContainer);
 
-	    this.getContentPane().add(new JButton(new ExportTweetsToCSVAction("Exporter les résultats en CSV", tableTweets)));
-   	    
-	    this.pack();
-	    this.setVisible(true);
+		// Boutton d'export
+		this.getContentPane()
+				.add(new JButton(new ExportTweetsToCSVAction("Exporter les résultats en CSV", tweetsTableModel)));
+
+		// Affichage
+		this.pack();
+		this.setVisible(true);
 	}
-	   
 
 }

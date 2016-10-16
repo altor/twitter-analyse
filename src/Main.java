@@ -4,20 +4,15 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public class Main {
 
-        public static void main(String[] args) throws TwitterException {
-        		TwitterAPI twitterAPI = new TwitterAPI();
-                
-        		TweetsTableModel tableTweets = new TweetsTableModel();
-        		
-        		
-        		// this.setModel(new TweetsTableModel(list));
-        		
-        		// on cree la table de tweet
-        		// on la passe a windows (elle est encore vide)
-        		Window window = new Window(twitterAPI, tableTweets);
-        		// la elle est pleine 
-        		
-                
-                
-        }
+	public static void main(String[] args) throws TwitterException {
+
+		// lancement de L'API Twitter (conexion)
+		TwitterAPI twitterAPI = new TwitterAPI();
+
+		// Création du model qui va contenir les Tweets
+		TweetsTableModel tableTweets = new TweetsTableModel();
+
+		// Création de la fenêtre d'interface
+		Window window = new Window(twitterAPI, tableTweets);
+	}
 }
