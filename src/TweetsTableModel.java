@@ -1,4 +1,3 @@
-
 /**
  * Model représentant la table des Tweets
  */
@@ -10,6 +9,9 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import com.opencsv.CSVWriter;
+
+import exceptions.BadLanguageException;
+import exceptions.SmileysException;
 
 import twitter4j.Status;
 
@@ -40,9 +42,19 @@ public class TweetsTableModel extends AbstractTableModel {
 	}
 
 	public void toCSVFile(String fileName) throws IOException {
-		CSVWriter writer = new CSVWriter(new FileWriter(fileName), '\t');
-		for (Tweet tweet : tweetList)
-			writer.writeNext(tweet.toCSVLine());
+		CSVWriter writer = new CSVWriter(new FileWriter(fileName, true), '\t');
+		for (Tweet tweet : tweetList) {
+			try {
+				writer.writeNext(tweet.toCSVLine());
+			} catch (BadLanguageException e) {
+				System.out.println("Mauvaise Langue : |" + e.getLang() + "|\n"
+						+ tweet.getStatus().getText());
+			} catch (SmileysException e) {
+				System.out.println("smiley positifs et négatifs détecté\n"
+						+ tweet.getStatus().getText());
+			}
+
+		}
 		writer.close();
 	}
 
@@ -77,7 +89,8 @@ public class TweetsTableModel extends AbstractTableModel {
 
 	public void setValueAt(Object annotation, int rowIndex, int columnIndex) {
 		if (columnIndex == 2)
-			tweetList.get(rowIndex).setAnnotation(Integer.parseInt((String) annotation));
+			tweetList.get(rowIndex).setAnnotation(
+					Integer.parseInt((String) annotation));
 		else
 			throw (new IllegalArgumentException());
 	}
