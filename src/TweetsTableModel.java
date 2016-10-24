@@ -68,9 +68,9 @@ public class TweetsTableModel extends AbstractTableModel implements Iterable<Twe
 		switch (columnIndex) {
 
 		case 0:
-			return tweet.getStatus().getUser().getScreenName();
+			return tweet.getUserName();
 		case 1:
-			return tweet.getStatus().getText();
+			return tweet.getText();
 		case 2:
 			return tweet.getAnnotation();
 		default:

@@ -28,10 +28,10 @@ public class TweetsTableController {
 				writer.writeNext(tweet.toCSVLine());
 			} catch (BadLanguageException e) {
 				System.out.println("Mauvaise Langue : |" + e.getLang() + "|\n"
-						+ tweet.getStatus().getText());
+						+ tweet.getText());
 			} catch (SmileysException e) {
 				System.out.println("smiley positifs et négatifs détecté\n"
-						+ tweet.getStatus().getText());
+						+ tweet.getText());
 			}
 
 		}
