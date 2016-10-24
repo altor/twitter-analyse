@@ -3,46 +3,60 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import exceptions.*;
-
 public class TweetTest {
+	
+	@Test
+	public void isNotFrenchTweetTest(){
+		Tweet t = createTweet("toto :) titi :(", "en");
+		assertFalse(t.isFrenchTweet());
+	}
+	
+	@Test
+	public void isFrenchTweetTest(){
+		Tweet t = createFRTweet("toto titi");
+		assertTrue(t.isFrenchTweet());
+	}
+	
+	@Test
+	public void ContainsInvalidIconsTest(){
+		Tweet t = createFRTweet("toto :) titi :(");
+		assertFalse(t.containsValidEmoticone());
+	}
+	
+	@Test
+	public void ContainsValidPositiveIconsTest(){
+		Tweet t = createFRTweet("toto :) titi");
+		assertTrue(t.containsValidEmoticone());
+	}
+	
+	@Test
+	public void ContainsValidNegativeIconsTest(){
+		Tweet t = createFRTweet("toto :( titi");
+		assertTrue(t.containsValidEmoticone());
+	}
+	
+	@Test
+	public void ContainsNoIconsTest(){
+		Tweet t = createFRTweet("toto titi");
+		assertTrue(t.containsValidEmoticone());
+	}
 
-	@Test(expected=BadLanguageException.class)
-	public void exportToCSVWithBadLanguageExceptiontest() throws BadLanguageException, SmileysException {
-		exportToCSV("toto", "en");
-	}
-	
-	@Test(expected=SmileysException.class)
-	public void exportToCSVWithSmileyExceptiontest() throws BadLanguageException, SmileysException {
-		exportToCSVfr("toto :) titi :(");
-	}
-
 	@Test
-	public void exportToCSVWithPositiveSmileyTest() throws BadLanguageException, SmileysException{
-		exportToCSVfr("toto :)");
-	}
-	
-	@Test
-	public void exportToCSVWithNegativeSmileyTest() throws BadLanguageException, SmileysException{
-		exportToCSVfr(":( toto :(");
-	}
-	
-	@Test
-	public void normalExportToCSVTest() throws BadLanguageException, SmileysException{
-		exportToCSVfr("toto titi tata");
+	public void normalExportToCSVTest(){
+		String text = "toto titi tata";
+		Tweet t = createFRTweet(text);
+		String [] csvLine = {"0", "toto", text, (new java.util.Date(0)).toString(),"-1"};
+		assertArrayEquals(csvLine, t.toCSVLine());
 	}
 	
 	// PRIVATE METHODS
 	
-	private void exportToCSV(String text, String lang) throws BadLanguageException, SmileysException{
-		String [] csvLine = {"0", "toto", text, (new java.util.Date(0)).toString(),"-1"};
-		Tweet tweet = new Tweet(new MockedStatus("toto", text, lang));
-		assertArrayEquals(csvLine, tweet.toCSVLine());
+	private Tweet createTweet(String text, String lang){
+		return new Tweet(new MockedStatus("toto", text, lang));
 	}
 	
-	private void exportToCSVfr(String text) throws BadLanguageException, SmileysException{
-		exportToCSV(text, "fr");
+	private Tweet createFRTweet(String text){
+		return createTweet(text, "fr");
 	}
-	
 	
 }

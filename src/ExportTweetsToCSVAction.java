@@ -21,7 +21,7 @@ public class ExportTweetsToCSVAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 
 		try {
-			tweetsTableController.toCSVFile("Tweets.csv");
+			tweetsTableController.toCSVFile();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

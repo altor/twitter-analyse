@@ -11,9 +11,6 @@ import javax.swing.table.AbstractTableModel;
 
 import com.opencsv.CSVWriter;
 
-import exceptions.BadLanguageException;
-import exceptions.SmileysException;
-
 import twitter4j.Status;
 import twitter4j.json.DataObjectFactory;
 

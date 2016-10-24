@@ -42,16 +42,21 @@ public class Window extends JFrame {
 		JScrollPane tableContainer = new JScrollPane(tweetstableView, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
+		// Zone des boutons
+			JPanel buttonsContainer = new JPanel();
+			buttonsContainer.setLayout(new BoxLayout(buttonsContainer, BoxLayout.X_AXIS));
+			buttonsContainer
+				.add(new JButton(new LoadToBaseAction("charger dans la base", tweetsTableController)));
+			buttonsContainer
+				.add(new JButton(new ExportTweetsToCSVAction("Exporter les résultats en CSV", tweetsTableController)));
+				
 		// Ajouts des différentes zones
 		Container frame = this.getContentPane();
 		frame.setLayout(new BoxLayout(frame, BoxLayout.PAGE_AXIS));
 		frame.add(researchContainer);
 		frame.add(tableContainer);
-
-		// Boutton d'export
-		this.getContentPane()
-				.add(new JButton(new ExportTweetsToCSVAction("Exporter les résultats en CSV", tweetsTableController)));
-
+		frame.add(buttonsContainer);
+		
 		// Affichage
 		this.pack();
 		this.setVisible(true);
