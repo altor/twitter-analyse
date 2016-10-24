@@ -10,7 +10,7 @@ public class Main {
 		TwitterAPI twitterAPI = new TwitterAPI();
 
 		// Création du model qui va contenir les Tweets
-		TweetsTableModel tableTweets = new TweetsTableModel();
+		TweetsTableController tableTweets = new TweetsTableController();
 
 		// Création de la fenêtre d'interface
 		Window window = new Window(twitterAPI, tableTweets);

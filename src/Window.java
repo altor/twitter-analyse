@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 
 public class Window extends JFrame {
 
-	public Window(TwitterAPI twitterAPI, TweetsTableModel tweetsTableModel) {
+	public Window(TwitterAPI twitterAPI, TweetsTableController tweetsTableController) {
 
 		// Informations générales
 		super("Recherche Twitter");
@@ -35,10 +35,10 @@ public class Window extends JFrame {
 		researchContainer.add(new JLabel("Rechercher"));
 		JTextField jf = new JTextField();
 		researchContainer.add(jf);
-		researchContainer.add(new JButton(new SearchAction("Rechercher", jf, twitterAPI, tweetsTableModel)));
+		researchContainer.add(new JButton(new SearchAction("Rechercher", jf, twitterAPI, tweetsTableController)));
 
 		// Zone d'affichage du tableau
-		TweetsTableView tweetstableView = new TweetsTableView(tweetsTableModel);
+		TweetsTableView tweetstableView = new TweetsTableView(tweetsTableController);
 		JScrollPane tableContainer = new JScrollPane(tweetstableView, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -50,7 +50,7 @@ public class Window extends JFrame {
 
 		// Boutton d'export
 		this.getContentPane()
-				.add(new JButton(new ExportTweetsToCSVAction("Exporter les résultats en CSV", tweetsTableModel)));
+				.add(new JButton(new ExportTweetsToCSVAction("Exporter les résultats en CSV", tweetsTableController)));
 
 		// Affichage
 		this.pack();

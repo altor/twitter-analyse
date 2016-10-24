@@ -11,17 +11,17 @@ import javax.swing.AbstractAction;
 
 public class ExportTweetsToCSVAction extends AbstractAction {
 
-	TweetsTableModel tweetsTableModel;
+	TweetsTableController tweetsTableController;
 
-	public ExportTweetsToCSVAction(String text, TweetsTableModel tweetsTableModel) {
+	public ExportTweetsToCSVAction(String text, TweetsTableController tweetsTableController) {
 		super(text);
-		this.tweetsTableModel = tweetsTableModel;
+		this.tweetsTableController = tweetsTableController;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 
 		try {
-			tweetsTableModel.toCSVFile("Tweets.csv");
+			tweetsTableController.toCSVFile("Tweets.csv");
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

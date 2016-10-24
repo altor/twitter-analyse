@@ -4,6 +4,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -17,7 +18,7 @@ import twitter4j.Status;
 import twitter4j.json.DataObjectFactory;
 
 // Permet de représenter la table des tweets
-public class TweetsTableModel extends AbstractTableModel {
+public class TweetsTableModel extends AbstractTableModel implements Iterable<Tweet>{
 
 	// Liste des Tweets contenus dans la table des tweets
 	protected ArrayList<Tweet> tweetList;
@@ -42,22 +43,7 @@ public class TweetsTableModel extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 
-	public void toCSVFile(String fileName) throws IOException {
-		CSVWriter writer = new CSVWriter(new FileWriter(fileName, true), '\t');
-		for (Tweet tweet : tweetList) {
-			try {
-				writer.writeNext(tweet.toCSVLine());
-			} catch (BadLanguageException e) {
-				System.out.println("Mauvaise Langue : |" + e.getLang() + "|\n"
-						+ tweet.getStatus().getText());
-			} catch (SmileysException e) {
-				System.out.println("smiley positifs et négatifs détecté\n"
-						+ tweet.getStatus().getText());
-			}
 
-		}
-		writer.close();
-	}
 
 	private Tweet getNTweet(int n) {
 		return tweetList.get(n);
@@ -65,6 +51,10 @@ public class TweetsTableModel extends AbstractTableModel {
 
 	// OVERIDED FUNCTIONS
 
+	public Iterator<Tweet> iterator(){
+		return tweetList.iterator();
+	}
+	
 	public int getColumnCount() {
 		return 3;
 	}

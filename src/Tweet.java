@@ -61,8 +61,6 @@ public class Tweet {
 			if (m.find())
 				negativePresent = true;
 		}
-
-		System.out.println(negativePresent ^ positivePresent);
 		return negativePresent && positivePresent;
 	}
 

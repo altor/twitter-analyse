@@ -16,20 +16,20 @@ public class SearchAction extends AbstractAction {
 
 	private JTextField requestField;
 	private TwitterAPI twitterAPI;
-	private TweetsTableModel tweetsTableModel;
+	private TweetsTableController tweetsTableController;
 
 	public SearchAction(String texte, JTextField requestField, TwitterAPI twitterAPI,
-			TweetsTableModel tweetsTableModel) {
+			TweetsTableController tweetsTableController) {
 		super(texte);
 		this.requestField = requestField;
 		this.twitterAPI = twitterAPI;
-		this.tweetsTableModel = tweetsTableModel;
+		this.tweetsTableController = tweetsTableController;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		try {
 			List<Tweet> tweetList = this.twitterAPI.getTweets(this.requestField.getText());
-			tweetsTableModel.updateTableModel(tweetList);
+			tweetsTableController.updateTableModel(tweetList);
 		} catch (Exception e1) {
 			System.out.println(e1.getMessage());
 		}
