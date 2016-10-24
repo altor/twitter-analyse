@@ -14,6 +14,7 @@ import exceptions.BadLanguageException;
 import exceptions.SmileysException;
 
 import twitter4j.Status;
+import twitter4j.json.DataObjectFactory;
 
 // Permet de représenter la table des tweets
 public class TweetsTableModel extends AbstractTableModel {

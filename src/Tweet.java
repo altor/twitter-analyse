@@ -62,7 +62,8 @@ public class Tweet {
 				negativePresent = true;
 		}
 
-		return negativePresent ^ positivePresent;
+		System.out.println(negativePresent ^ positivePresent);
+		return negativePresent && positivePresent;
 	}
 
 	public String[] toCSVLine() throws BadLanguageException, SmileysException {

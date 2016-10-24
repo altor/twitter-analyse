@@ -26,7 +26,7 @@ public class MockedStatus implements Status {
 		this.text = text;
 		this.lang = lang;
 		this.user = new MockedUser(userName);
-		createdDate = new Date();
+		createdDate = new Date(0);
 	}
 	
 	@Override
