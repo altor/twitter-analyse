@@ -68,6 +68,30 @@ public class TweetTest {
 	}
 	
 	@Test
+	public void cleanSpacesTest(){
+		String text = "toto  titi";
+		Tweet t = createFRTweet(text);
+		t.suppUrl();
+		t.cleanSpaces();
+		assertEquals(t.getText(), "toto titi");
+		
+		text = "toto  titi ";
+		t = createFRTweet(text);
+		t.suppUrl();
+		t.cleanSpaces();
+		assertEquals(t.getText(), "toto titi");
+		
+		text = " toto titi";
+		t = createFRTweet(text);
+		t.suppUrl();
+		t.cleanSpaces();
+		assertEquals(t.getText(), "toto titi");
+		
+		
+		
+	}
+	
+	@Test
 	public void suppUrlEmptyTest(){
 		String text = "toto titi tata";
 		Tweet t = createFRTweet(text);
