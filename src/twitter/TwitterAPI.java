@@ -1,3 +1,4 @@
+package twitter;
 
 /**
  * Classe permetant toute les interactions avec Twitter

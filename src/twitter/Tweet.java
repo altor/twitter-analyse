@@ -1,3 +1,4 @@
+package twitter;
 /**
  * Contient un Tweet (Status) ainsi que son Annotation
  */
@@ -108,27 +109,13 @@ public class Tweet {
 	}
 
 	public void cleanSpaces(){
-		Pattern p = Pattern.compile("  |\u00A0");
+		Pattern p = Pattern.compile("  |\u00A0|");
 		Pattern endOrBeginPattern = Pattern.compile(" $|^ ");
 		Matcher m = p.matcher(tweetText);
 		tweetText = m.replaceAll(" ");
 		
 		Matcher m2 = endOrBeginPattern.matcher(tweetText);
 		tweetText = m2.replaceAll("");
-	}
-	
-	// remplacer les sommes avec des $XX ou €XX. 
-	public void suppSomme(){ 
-		
-		
-		Pattern p = Pattern.compile("($[0-9]*|$[0-9]*.[0-9]");
-		Matcher m = p.matcher(tweetText);
-		tweetText = m.replaceAll("$XX");
-		
-		Pattern p1 = Pattern.compile("€[0-9]|€[0-9]*.[0-9]*");
-		Matcher m1 = p1.matcher(tweetText);
-		tweetText = m1.replaceAll("€XX");
-		
 	}
 
 
@@ -182,6 +169,10 @@ public class Tweet {
 		System.out.println(tweetText);
 
 		cleanSpaces();		
+	}
+	
+	public void cleanMonnay(){
+		
 	}
 	
 	public boolean isRetweet() {

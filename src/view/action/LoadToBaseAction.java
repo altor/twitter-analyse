@@ -1,6 +1,10 @@
+package view.action;
+
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+
+import controller.TweetsTableController;
 
 public class LoadToBaseAction extends AbstractAction {
 

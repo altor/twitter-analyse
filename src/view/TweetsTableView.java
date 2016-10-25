@@ -1,3 +1,5 @@
+package view;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.List;
@@ -10,6 +12,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
+
+import controller.TweetsTableController;
 
 import twitter4j.Status;
 /**

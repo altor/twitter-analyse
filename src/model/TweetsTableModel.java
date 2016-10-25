@@ -1,6 +1,8 @@
+package model;
 /**
  * Model représentant la table des Tweets
  */
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import javax.swing.table.AbstractTableModel;
 
 import com.opencsv.CSVWriter;
 
+import twitter.Tweet;
 import twitter4j.Status;
 import twitter4j.json.DataObjectFactory;
 

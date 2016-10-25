@@ -1,8 +1,13 @@
+package start_app;
 import java.io.IOException;
 
+import controller.TweetsTableController;
+
+import twitter.TwitterAPI;
 import twitter4j.*;
 import twitter4j.auth.OAuth2Token;
 import twitter4j.conf.ConfigurationBuilder;
+import view.Window;
 
 public class Main {
 

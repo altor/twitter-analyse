@@ -1,3 +1,4 @@
+package controller;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -6,6 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.TableModel;
+
+import twitter.Tweet;
+
+import model.TweetsBase;
+import model.TweetsTableModel;
+
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;

@@ -1,13 +1,17 @@
+package view.action;
 
 /**
  * Action lancée lorsque le bouton "exporter au format CSV est activé Il
  * demande au model d'exporter ces données au format CSV
  */
 
+
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import javax.swing.AbstractAction;
+
+import controller.TweetsTableController;
 
 public class ExportTweetsToCSVAction extends AbstractAction {
 

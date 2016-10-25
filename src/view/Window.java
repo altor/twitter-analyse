@@ -1,7 +1,9 @@
+package view;
 
 /**
  * Fenêtre de l'interface graphique
 */
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -18,6 +20,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import controller.TweetsTableController;
+
+import twitter.TwitterAPI;
+import view.action.ExportTweetsToCSVAction;
+import view.action.LoadToBaseAction;
+import view.action.SearchAction;
+
 
 public class Window extends JFrame {
 
