@@ -13,6 +13,9 @@ import twitter4j.Status;
 public class Tweet {
 
 	protected int annotation;
+
+	private String nt;
+
 	protected Long id;
 	protected String userName;
 	protected String tweetText;
@@ -23,6 +26,7 @@ public class Tweet {
 		return tweetText;
 	}
 	
+
 
 	public Tweet(Status status) {
 		
@@ -93,6 +97,23 @@ public class Tweet {
 		return line;
 	}
 
+	
+	
+	
+			
+
+	private boolean tweet(String string, char d, char e, char f, char g) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private boolean tweet(char c, char d, char e, char f, char g) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+
+
 
 	public String getUserName() {
 		return userName;
@@ -102,6 +123,7 @@ public class Tweet {
 	public Long getId() {
 		return id;
 	}
+
 	
 	public void filtreArobase() {
 		this.tweetText = this.tweetText.replaceAll("@\\p{ASCII}[^\\p{Space}]*", "");
@@ -110,4 +132,5 @@ public class Tweet {
 	public void filtreHastag() {
 		this.tweetText = this.tweetText.replaceAll("#\\p{ASCII}[^\\p{Space}]*", "");
 	}
+
 }
