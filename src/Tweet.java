@@ -20,6 +20,8 @@ public class Tweet {
 	protected String date;
 	protected String lang;
 	
+	protected boolean isRT;
+	
 	public String getText(){
 		return tweetText;
 	}
@@ -27,7 +29,7 @@ public class Tweet {
 
 
 	public Tweet(Status status) {
-		
+		this.isRT = status.isRetweet();
 		this.id = new Long(status.getId());
 		this.userName = status.getUser().getName();
 		this.tweetText = status.getText();
@@ -37,7 +39,7 @@ public class Tweet {
 	}
 	
 	public Tweet(String []csvLine){
-		
+		this.isRT = false;
 		this.id = new Long(Long.parseLong(csvLine[0]));
 		this.userName = csvLine[1];
 		this.tweetText = csvLine[2];
@@ -127,4 +129,8 @@ public class Tweet {
 		this.tweetText = this.tweetText.replaceAll("#\\p{ASCII}[^\\p{Space}]*", "");
 	}
 
+	public boolean isRetweet() {
+		return this.isRT;
+	}
+	
 }
