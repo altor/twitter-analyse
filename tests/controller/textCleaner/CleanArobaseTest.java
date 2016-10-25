@@ -8,9 +8,9 @@ import org.junit.Test;
 public class CleanArobaseTest extends AbstractCleanTextTest {
 
 	@BeforeClass
-	 public void launch(){
+	public static void launch(){
 		 cleanMethod = new CleanMethod("@\\p{ASCII}[^\\p{Space}]*", "");
-	 }
+	}
 	
 	@Test
 	public void NormalTest() {

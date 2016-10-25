@@ -10,7 +10,7 @@ public class CleanMethod {
 	protected String replacementString;
 	
 	public CleanMethod(String regexp, String replacementString){
-		Pattern p = Pattern.compile("regexp");
+		pattern = Pattern.compile(regexp);
 		this.replacementString = replacementString;
 		
 	}

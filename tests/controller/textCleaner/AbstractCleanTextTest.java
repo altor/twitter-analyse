@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public abstract class AbstractCleanTextTest {
 	
-	protected CleanMethod cleanMethod;
+	protected static CleanMethod cleanMethod;
 	
 	@Test
 	public void EmptyTest() {

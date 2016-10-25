@@ -8,7 +8,7 @@ import org.junit.Test;
 public class CleanURLTest extends AbstractCleanTextTest {
 
 	 @BeforeClass
-	 public void launch(){
+	 public static void launch(){
 		 cleanMethod = new CleanMethod("(https?://([-\\w\\.]+)+(/([\\w/_\\.]*(\\?\\S+)?(#\\S+)?)?)?)", "");
 	 }
 	

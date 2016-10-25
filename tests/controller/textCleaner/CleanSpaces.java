@@ -11,8 +11,8 @@ public class CleanSpaces extends AbstractCleanTextTest {
 
 	
 	@BeforeClass
-	 public void launch(){
-		 cleanMethod = new CleanMethod("  |\u00A0|", " ");
+	 public static void launch(){
+		 cleanMethod = new CleanMethod("\\s\\s|\u00A0", " ");
 	 }
 	
 	@Test

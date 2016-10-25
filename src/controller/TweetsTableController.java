@@ -17,6 +17,9 @@ import model.TweetsTableModel;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
+import controller.textCleaner.CleanMethod;
+import controller.textCleaner.TextCleaner;
+
 
 public class TweetsTableController {
 
@@ -24,7 +27,7 @@ public class TweetsTableController {
 	protected TweetsTableModel tweetsTableModel;
 	protected TweetsBase tweetsBase;
 	protected String csvFileName;
-	
+	protected TextCleaner tweetCleaner;
 	
 	public TweetsTableController(String csvFileName) throws IOException{
 		FileReader file = null;
@@ -39,6 +42,22 @@ public class TweetsTableController {
 		this.tweetsTableModel = new TweetsTableModel();
 		this.csvFileName = csvFileName;
 		
+		tweetCleaner = new TextCleaner();
+		// supression des doubles espace et espaces insécables
+		tweetCleaner.add(new CleanMethod("  |\u00A0|", " "));
+		// supression des références à un utilisateur
+		tweetCleaner.add(new CleanMethod("@\\p{ASCII}[^\\p{Space}]*", ""));
+		// supression des URL
+		tweetCleaner.add(new CleanMethod("(https?://([-\\w\\.]+)+(/([\\w/_\\.]*(\\?\\S+)?(#\\S+)?)?)?)", ""));
+		// supression des guillements
+		tweetCleaner.add(new CleanMethod("\"\\s*\"", ""));
+		tweetCleaner.add(new CleanMethod(" $|^ ", ""));
+		// supression des doubles espace et espaces insécables
+		tweetCleaner.add(new CleanMethod("  |\u00A0|", " "));
+
+		
+
+
 	}
 	
 	public void loadToBase(){
@@ -46,7 +65,7 @@ public class TweetsTableController {
 			if(tweetsBase.contains(tweet.getId()))
 				System.out.println(tweet.getId() + " : Tweet déjà présent");
 			else
-				tweet.cleanText();
+				tweet.clean(tweetCleaner);
 				tweetsBase.addTweet(tweet);
 		}
 		updateTableModel(new ArrayList());
