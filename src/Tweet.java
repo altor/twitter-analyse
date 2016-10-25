@@ -9,6 +9,7 @@ public class Tweet {
 
 	protected Status status;
 	protected int annotation;
+	private String nt;
 
 	public Tweet(Status status) {
 		this.status = status;
@@ -36,4 +37,19 @@ public class Tweet {
 		String line[] = { Long.toString(id), userName, tweetText, tweetDate.toString(), Integer.toString(annotation) };
 		return line;
 	}
+	
+	
+	
+			
+
+	private boolean tweet(String string, char d, char e, char f, char g) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private boolean tweet(char c, char d, char e, char f, char g) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 }

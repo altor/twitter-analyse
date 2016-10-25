@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -48,6 +50,34 @@ public class TweetsTableModel extends AbstractTableModel {
 
 	private Tweet getNTweet(int n) {
 		return tweetList.get(n);
+	}
+	
+	
+	
+	// méthode pour nettoyer les caractére 
+	public void clenner() {
+		
+		for(Tweet tweet : tweetList){ 
+			//Object p;
+			if(tweet ==  ('@','#','-','_',' ' )){
+				
+				 Pattern p1 = Pattern.compile("@[a-z A-Z]*[0-9]|#-_|http://[a-z A-Z]*[0-9]");
+			     Matcher m = p1.matcher(" ");
+			     System.out.println(m.replaceAll(""));
+			     System.out.println(m.find());	    
+			     
+			}
+	    }
+	}
+			
+    
+			
+		
+	
+
+	private boolean tweet(char c, char d, char e, char f) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	// OVERIDED FUNCTIONS
