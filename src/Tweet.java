@@ -97,8 +97,8 @@ public class Tweet {
 		return line;
 	}
 
-	private void cleanSpaces(){
-		Pattern p = Pattern.compile("  ");
+	public void cleanSpaces(){
+		Pattern p = Pattern.compile("  | $|^ ");
 		Matcher m = p.matcher(tweetText);
 		tweetText = m.replaceAll(" ");
 	}
