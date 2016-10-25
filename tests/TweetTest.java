@@ -52,30 +52,6 @@ public class TweetTest {
 	}
 	
 	@Test
-	public void suppUrlNormalTest(){
-		String text = "http://twitter4j.org/javadoc/twitter4j/Status.html#isRetweet-- toto titi tata";
-		Tweet t = createFRTweet(text);
-		t.suppUrl();
-		t.cleanSpaces();
-		assertEquals(t.getText(), "toto titi tata");
-		
-		text = "https://t.co/Ft0IyD0XiZ toto titi tata";
-		t = createFRTweet(text);
-		t.suppUrl();
-		t.cleanSpaces();
-		assertEquals(t.getText(), "toto titi tata");
-	}
-	
-	@Test
-	public void suppUrlHTTPSTest(){
-		String text = "https://twitter4j.org/javadoc/twitter4j/Status.html#isRetweet-- toto titi tata";
-		Tweet t = createFRTweet(text);
-		t.suppUrl();
-		t.cleanSpaces();
-		assertEquals(t.getText(), "toto titi tata");
-	}
-	
-	@Test
 	public void cleanTest(){
 		//chaine avec espace insécable avant le :
 		String text = "J'aime une vidéo @YouTube : \"CYPRIEN - PARODIE PUB APPLE WATCH\" à l'adresse https://t.co/qDqSlif08B.";;

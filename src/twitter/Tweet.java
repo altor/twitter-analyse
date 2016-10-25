@@ -98,16 +98,6 @@ public class Tweet {
 		return line;
 	}
 
-
-	
-	public void suppUrl(){
-		
-		Pattern p = Pattern.compile("(https?://([-\\w\\.]+)+(/([\\w/_\\.]*(\\?\\S+)?(#\\S+)?)?)?)");
-		Matcher m = p.matcher(tweetText);
-		tweetText =(m.replaceAll(""));
-			
-	}
-
 	public void cleanSpaces(){
 		Pattern p = Pattern.compile("  |\u00A0|");
 		Pattern endOrBeginPattern = Pattern.compile(" $|^ ");
