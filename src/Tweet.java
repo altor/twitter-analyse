@@ -140,10 +140,17 @@ public class Tweet {
 		this.tweetText = this.tweetText.replaceAll("@\\p{ASCII}[^\\p{Space}]*", "");
 	}
 	
-	public void filtreHastag() {
+	public void filtreHashtag() {
 		this.tweetText = this.tweetText.replaceAll("#\\p{ASCII}[^\\p{Space}]*", "");
 	}
 
+	public void cleanText(){
+		filtreHashtag();
+		filtreArobase();
+		suppUrl();
+		cleanSpaces();		
+	}
+	
 	public boolean isRetweet() {
 		return this.isRT;
 	}
