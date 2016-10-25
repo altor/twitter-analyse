@@ -18,11 +18,11 @@ import twitter4j.Status;
 
 public class TweetsTableView extends JTable implements TableModelListener {
 
-	public TweetsTableView(TweetsTableModel model) {
+	public TweetsTableView(TweetsTableController tweetsTableController) {
 		super();
 
 		// Associe un model à la vue
-		this.setModel(model);
+		this.setModel(tweetsTableController.getModel());
 
 		// Indique au model la vue à mettre à jour lors d'une modification de la
 		// table des tweets

@@ -9,3 +9,4 @@ author: D'AZEMAR Arthur
 
 - [twitter4J](http://twitter4j.org/en/index.html) 
 - [opencsv](https://sourceforge.net/projects/opencsv/)
+- [commons-lang3](https://commons.apache.org/proper/commons-lang/download_lang.cgi)
