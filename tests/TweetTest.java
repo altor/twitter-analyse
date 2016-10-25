@@ -56,6 +56,12 @@ public class TweetTest {
 		t.suppUrl();
 		t.cleanSpaces();
 		assertEquals(t.getText(), "toto titi tata");
+		
+		text = "https://t.co/Ft0IyD0XiZ toto titi tata";
+		t = createFRTweet(text);
+		t.suppUrl();
+		t.cleanSpaces();
+		assertEquals(t.getText(), "toto titi tata");
 	}
 	
 	@Test
@@ -65,6 +71,40 @@ public class TweetTest {
 		t.suppUrl();
 		t.cleanSpaces();
 		assertEquals(t.getText(), "toto titi tata");
+	}
+	
+	@Test
+	public void cleanTest(){
+		//chaine avec espace insécable avant le :
+		String text = "J'aime une vidéo @YouTube : \"CYPRIEN - PARODIE PUB APPLE WATCH\" à l'adresse https://t.co/qDqSlif08B.";;
+		Tweet t = createFRTweet(text);
+		t.cleanText();
+		//chaine sans espace insécable avant le :
+		assertEquals(t.getText(), "J'aime une vidéo : \"CYPRIEN - PARODIE PUB APPLE WATCH\" à l'adresse");
+	}
+	
+	@Test
+	public void cleanSpacesTest(){
+		String text = "toto  titi";
+		Tweet t = createFRTweet(text);
+		t.suppUrl();
+		t.cleanSpaces();
+		assertEquals(t.getText(), "toto titi");
+		
+		text = "toto  titi ";
+		t = createFRTweet(text);
+		t.suppUrl();
+		t.cleanSpaces();
+		assertEquals(t.getText(), "toto titi");
+		
+		text = " toto titi";
+		t = createFRTweet(text);
+		t.suppUrl();
+		t.cleanSpaces();
+		assertEquals(t.getText(), "toto titi");
+		
+		
+		
 	}
 	
 	@Test

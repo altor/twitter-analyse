@@ -106,11 +106,15 @@ public class Tweet {
 		tweetText =(m.replaceAll(""));
 			
 	}
-				
+
 	public void cleanSpaces(){
-		Pattern p = Pattern.compile("  | $|^ ");
+		Pattern p = Pattern.compile("  |\u00A0");
+		Pattern endOrBeginPattern = Pattern.compile(" $|^ ");
 		Matcher m = p.matcher(tweetText);
 		tweetText = m.replaceAll(" ");
+		
+		Matcher m2 = endOrBeginPattern.matcher(tweetText);
+		tweetText = m2.replaceAll("");
 	}
 	
 	// remplacer les sommes avec des $XX ou €XX. 
@@ -150,10 +154,36 @@ public class Tweet {
 		this.tweetText = this.tweetText.replaceAll("@\\p{ASCII}[^\\p{Space}]*", "");
 	}
 	
-	public void filtreHastag() {
+	public void filtreHashtag() {
 		this.tweetText = this.tweetText.replaceAll("#\\p{ASCII}[^\\p{Space}]*", "");
 	}
+	
+	public void filtreGuillemet() {
+		this.tweetText = this.tweetText.replaceAll("\"\\s*\"", "");
+	}
+	
 
+	public void cleanText(){
+		System.out.println("======================");
+		System.out.println(tweetText);
+		//remplacement des espaces insécables
+		cleanSpaces();
+		
+
+		System.out.println( (int)(tweetText.charAt(25)));
+		filtreHashtag();
+		System.out.println(tweetText);
+		
+		filtreArobase();
+		suppUrl();
+		System.out.println(tweetText);
+
+		filtreGuillemet();
+		System.out.println(tweetText);
+
+		cleanSpaces();		
+	}
+	
 	public boolean isRetweet() {
 		return this.isRT;
 	}
