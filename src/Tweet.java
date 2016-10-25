@@ -101,23 +101,12 @@ public class Tweet {
 	
 	public void suppUrl(){
 		
-		Pattern p = Pattern.compile("http://[a-z A-Z]*[0-9]");
-		Matcher m = p.matcher(tweetText);
-		tweetText =(m.replaceAll(""));
-			
-	}
-	
-	
-	public void suppHttps(){
-		
 		Pattern p = Pattern.compile("(https?://([-\\w\\.]+)+(/([\\w/_\\.]*(\\?\\S+)?(#\\S+)?)?)?)");
 		Matcher m = p.matcher(tweetText);
 		tweetText =(m.replaceAll(""));
 			
 	}
-	
-			
-
+				
 	public void cleanSpaces(){
 		Pattern p = Pattern.compile("  | $|^ ");
 		Matcher m = p.matcher(tweetText);
