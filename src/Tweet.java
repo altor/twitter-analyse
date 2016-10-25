@@ -100,9 +100,6 @@ public class Tweet {
 		Matcher m = p.matcher(tweetText);
 		tweetText = m.replaceAll(" ");
 	}
-	
-	
-			
 
 	private boolean tweet(String string, char d, char e, char f, char g) {
 		// TODO Auto-generated method stub
@@ -114,19 +111,14 @@ public class Tweet {
 		return false;
 	}
 	
-
-
-
 	public String getUserName() {
 		return userName;
 	}
-
 
 	public Long getId() {
 		return id;
 	}
 
-	
 	public void filtreArobase() {
 		this.tweetText = this.tweetText.replaceAll("@\\p{ASCII}[^\\p{Space}]*", "");
 	}
