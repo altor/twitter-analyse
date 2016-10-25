@@ -55,14 +55,10 @@ public class TweetsTableModel extends AbstractTableModel implements Iterable<Twe
 		
 		for(Tweet tweet : tweetList){ 
 			
-			
-				
-				 Pattern p1 = Pattern.compile("@[a-z A-Z]*[0-9]|#-_|http://[a-z A-Z]*[0-9]");
-			     Matcher m = p1.matcher(" ");
-			     System.out.println(m.replaceAll(""));
-			     System.out.println(m.find());	    
-			     
-			
+			 Pattern p1 = Pattern.compile("@[a-z A-Z]*[0-9]|#-_|http://[a-z A-Z]*[0-9]");
+		     Matcher m = p1.matcher(" ");
+		     System.out.println(m.replaceAll(""));
+		     System.out.println(m.find());	    
 	    }
 	}
 			
