@@ -58,7 +58,7 @@ public class TweetsTableController {
 		for(Tweet tweet : tweetsList){
 			if(tweet.containsValidEmoticone())
 				if(tweet.isFrenchTweet())
-					if(tweet.isRetweet())
+					if(!tweet.isRetweet())
 						validTweetList.add(tweet);
 					else
 						System.out.println(tweet.getId() + " :  RT");
