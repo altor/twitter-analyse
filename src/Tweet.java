@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import twitter4j.Status;
 
@@ -100,5 +101,13 @@ public class Tweet {
 
 	public Long getId() {
 		return id;
+	}
+	
+	public void filtreArobase() {
+		this.tweetText = this.tweetText.replaceAll("@\\p{ASCII}[^\\p{Space}]*", "");
+	}
+	
+	public void filtreHastag() {
+		this.tweetText = this.tweetText.replaceAll("#\\p{ASCII}[^\\p{Space}]*", "");
 	}
 }
