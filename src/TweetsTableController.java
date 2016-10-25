@@ -61,7 +61,7 @@ public class TweetsTableController {
 					if(tweet.isRetweet())
 						validTweetList.add(tweet);
 					else
-						System.out.println(tweet.getId() + " :  RT")
+						System.out.println(tweet.getId() + " :  RT");
 				else
 					System.out.println(tweet.getId() + " : Mauvaise Langue");
 			else

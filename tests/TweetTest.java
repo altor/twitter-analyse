@@ -49,6 +49,33 @@ public class TweetTest {
 		assertArrayEquals(csvLine, t.toCSVLine());
 	}
 	
+	@Test
+	public void suppUrlNormalTest(){
+		String text = "http://twitter4j.org/javadoc/twitter4j/Status.html#isRetweet-- toto titi tata";
+		Tweet t = createFRTweet(text);
+		t.suppUrl();
+		t.cleanSpaces();
+		assertEquals(t.getText(), "toto titi tata");
+	}
+	
+	@Test
+	public void suppUrlHTTPSTest(){
+		String text = "https://twitter4j.org/javadoc/twitter4j/Status.html#isRetweet-- toto titi tata";
+		Tweet t = createFRTweet(text);
+		t.suppUrl();
+		t.cleanSpaces();
+		assertEquals(t.getText(), "toto titi tata");
+	}
+	
+	@Test
+	public void suppUrlEmptyTest(){
+		String text = "toto titi tata";
+		Tweet t = createFRTweet(text);
+		t.suppUrl();
+		t.cleanSpaces();
+		assertEquals(t.getText(), "toto titi tata");
+	}
+	
 	// PRIVATE METHODS
 	
 	private Tweet createTweet(String text, String lang){
