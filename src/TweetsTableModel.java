@@ -51,10 +51,10 @@ public class TweetsTableModel extends AbstractTableModel implements Iterable<Twe
 	
 	
 	// méthode pour nettoyer les caractére 
+	
 	public void clenner() {
 		
 		for(Tweet tweet : tweetList){ 
-			
 			
 				
 				 Pattern p1 = Pattern.compile("@[a-z A-Z]*[0-9]|#-_|http://[a-z A-Z]*[0-9]");
@@ -63,12 +63,9 @@ public class TweetsTableModel extends AbstractTableModel implements Iterable<Twe
 			     System.out.println(m.find());	    
 			     
 			
+
 	    }
 	}
-			
-    
-			
-		
 	
 
 	private boolean tweet(char c, char d, char e, char f) {

@@ -39,6 +39,7 @@ public class TweetsTableController {
 			if(tweetsBase.contains(tweet.getId()))
 				System.out.println(tweet.getId() + " : Tweet déjà présent");
 			else
+				tweet.cleanText();
 				tweetsBase.addTweet(tweet);
 		}
 		updateTableModel(new ArrayList());
