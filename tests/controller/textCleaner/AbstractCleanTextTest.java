@@ -4,9 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import tools.textCleaner.ReplaceStringCleanMethod;
+
 public abstract class AbstractCleanTextTest {
 	
-	protected static CleanMethod cleanMethod;
+	protected static ReplaceStringCleanMethod cleanMethod;
 	
 	@Test
 	public void EmptyTest() {

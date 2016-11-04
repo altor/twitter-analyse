@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import controller.textCleaner.TextCleaner;
+import tools.textCleaner.TextCleaner;
 import twitter4j.Status;
 
 public class Tweet {

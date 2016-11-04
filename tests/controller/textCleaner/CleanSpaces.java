@@ -7,12 +7,14 @@ import java.util.regex.Pattern;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tools.textCleaner.ReplaceStringCleanMethod;
+
 public class CleanSpaces extends AbstractCleanTextTest {
 
 	
 	@BeforeClass
 	 public static void launch(){
-		 cleanMethod = new CleanMethod("\\s\\s|\u00A0", " ");
+		 cleanMethod = new ReplaceStringCleanMethod("\\s\\s|\u00A0", " ");
 	 }
 	
 	@Test

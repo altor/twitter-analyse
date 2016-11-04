@@ -5,11 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tools.textCleaner.ReplaceStringCleanMethod;
+
 public class CleanArobaseTest extends AbstractCleanTextTest {
 
 	@BeforeClass
 	public static void launch(){
-		 cleanMethod = new CleanMethod("@\\p{ASCII}[^\\p{Space}]*", "");
+		 cleanMethod = new ReplaceStringCleanMethod("@\\p{ASCII}[^\\p{Space}]*", "");
 	}
 	
 	@Test

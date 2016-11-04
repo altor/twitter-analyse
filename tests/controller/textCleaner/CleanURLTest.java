@@ -5,11 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tools.textCleaner.ReplaceStringCleanMethod;
+
 public class CleanURLTest extends AbstractCleanTextTest {
 
 	 @BeforeClass
 	 public static void launch(){
-		 cleanMethod = new CleanMethod("(https?://([-\\w\\.]+)+(/([\\w/_\\.]*(\\?\\S+)?(#\\S+)?)?)?)", "");
+		 cleanMethod = new ReplaceStringCleanMethod("(https?://([-\\w\\.]+)+(/([\\w/_\\.]*(\\?\\S+)?(#\\S+)?)?)?)", "");
 	 }
 	
 	@Test

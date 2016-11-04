@@ -12,13 +12,11 @@ import twitter.Tweet;
 
 import model.TweetsBase;
 import model.TweetsTableModel;
-
+import tools.textCleaner.ReplaceStringCleanMethod;
+import tools.textCleaner.TextCleaner;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-
-import controller.textCleaner.CleanMethod;
-import controller.textCleaner.TextCleaner;
 
 
 public class TweetsTableController {
@@ -44,16 +42,16 @@ public class TweetsTableController {
 		
 		tweetCleaner = new TextCleaner();
 		// supression des doubles espace et espaces insécables
-		tweetCleaner.add(new CleanMethod("  |\u00A0|", " "));
+		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0|", " "));
 		// supression des références à un utilisateur
-		tweetCleaner.add(new CleanMethod("@\\p{ASCII}[^\\p{Space}]*", ""));
+		tweetCleaner.add(new ReplaceStringCleanMethod("@\\p{ASCII}[^\\p{Space}]*", ""));
 		// supression des URL
-		tweetCleaner.add(new CleanMethod("(https?://([-\\w\\.]+)+(/([\\w/_\\.]*(\\?\\S+)?(#\\S+)?)?)?)", ""));
+		tweetCleaner.add(new ReplaceStringCleanMethod("(https?://([-\\w\\.]+)+(/([\\w/_\\.]*(\\?\\S+)?(#\\S+)?)?)?)", ""));
 		// supression des guillements
-		tweetCleaner.add(new CleanMethod("\"\\s*\"", ""));
-		tweetCleaner.add(new CleanMethod(" $|^ ", ""));
+		tweetCleaner.add(new ReplaceStringCleanMethod("\"\\s*\"", ""));
+		tweetCleaner.add(new ReplaceStringCleanMethod(" $|^ ", ""));
 		// supression des doubles espace et espaces insécables
-		tweetCleaner.add(new CleanMethod("  |\u00A0|", " "));
+		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0|", " "));
 
 		
 

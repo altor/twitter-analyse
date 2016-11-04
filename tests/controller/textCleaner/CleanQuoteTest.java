@@ -6,11 +6,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tools.textCleaner.ReplaceStringCleanMethod;
+
 public class CleanQuoteTest extends AbstractCleanTextTest {
 
 	@BeforeClass
 	 public static void launch(){
-		 cleanMethod = new CleanMethod("\"\\s*\"", "");
+		 cleanMethod = new ReplaceStringCleanMethod("\"\\s*\"", "");
 	 }
 
 	@Test
