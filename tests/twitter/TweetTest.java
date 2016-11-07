@@ -1,4 +1,5 @@
 package twitter;
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -10,58 +11,46 @@ public class TweetTest {
 	
 	@Test
 	public void isNotFrenchTweetTest(){
-		Tweet t = createTweet("toto :) titi :(", "en");
+		Tweet t = new MockedTweet("user", "toto :) titi :(", "en");
 		assertFalse(t.isFrenchTweet());
 	}
 	
 	@Test
 	public void isFrenchTweetTest(){
-		Tweet t = createFRTweet("toto titi");
+		Tweet t = new MockedTweet("toto titi");
 		assertTrue(t.isFrenchTweet());
 	}
 	
 	@Test
 	public void ContainsInvalidIconsTest(){
-		Tweet t = createFRTweet("toto :) titi :(");
+		Tweet t = new MockedTweet("toto :) titi :(");
 		assertFalse(t.containsValidEmoticone());
 	}
 	
 	@Test
 	public void ContainsValidPositiveIconsTest(){
-		Tweet t = createFRTweet("toto :) titi");
+		Tweet t = new MockedTweet("toto :) titi");
 		assertTrue(t.containsValidEmoticone());
 	}
 	
 	@Test
 	public void ContainsValidNegativeIconsTest(){
-		Tweet t = createFRTweet("toto :( titi");
+		Tweet t = new MockedTweet("toto :( titi");
 		assertTrue(t.containsValidEmoticone());
 	}
 	
 	@Test
 	public void ContainsNoIconsTest(){
-		Tweet t = createFRTweet("toto titi");
+		Tweet t = new MockedTweet("toto titi");
 		assertTrue(t.containsValidEmoticone());
 	}
 
 	@Test
 	public void normalExportToCSVTest(){
 		String text = "toto titi tata";
-		Tweet t = createFRTweet(text);
+		Tweet t = new MockedTweet(text);
 		String [] csvLine = {"0", "toto", text, (new java.util.Date(0)).toString(),"-1"};
 		assertArrayEquals(csvLine, t.toCSVLine());
-	}
-	
-
-
-	// PRIVATE METHODS
-	
-	private Tweet createTweet(String text, String lang){
-		return new Tweet(new MockedStatus("toto", text, lang));
-	}
-	
-	private Tweet createFRTweet(String text){
-		return createTweet(text, "fr");
 	}
 	
 }

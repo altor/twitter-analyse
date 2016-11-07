@@ -26,7 +26,7 @@ public class TweetsTableView extends JTable implements TableModelListener {
 		super();
 
 		// Associe un model à la vue
-		this.setModel(tweetsTableController.getModel());
+		this.setModel(tweetsTableController.getTableModel());
 
 		// Indique au model la vue à mettre à jour lors d'une modification de la
 		// table des tweets

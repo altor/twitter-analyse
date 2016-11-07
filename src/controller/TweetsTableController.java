@@ -12,6 +12,7 @@ import twitter.Tweet;
 
 import model.TweetsBase;
 import model.TweetsTableModel;
+import tools.classification.AbstractClassification;
 import tools.textCleaner.ReplaceStringCleanMethod;
 import tools.textCleaner.TextCleaner;
 
@@ -26,10 +27,12 @@ public class TweetsTableController {
 	protected TweetsBase tweetsBase;
 	protected String csvFileName;
 	protected TextCleaner tweetCleaner;
+	protected AbstractClassification classificator;
 	
-	public TweetsTableController(String csvFileName) throws IOException{
+	
+	public TweetsTableController(String csvFileName, AbstractClassification classificator) throws IOException{
 		FileReader file = null;
-		
+		this.classificator = classificator;
 		try {
 			file = new FileReader(csvFileName);
 			CSVReader reader = new CSVReader(new FileReader(csvFileName), '\t');
@@ -42,7 +45,7 @@ public class TweetsTableController {
 		
 		tweetCleaner = new TextCleaner();
 		// supression des doubles espace et espaces insécables
-		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0|", " "));
+		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0", " "));
 		// supression des références à un utilisateur
 		tweetCleaner.add(new ReplaceStringCleanMethod("@\\p{ASCII}[^\\p{Space}]*", ""));
 		// supression des URL
@@ -51,7 +54,7 @@ public class TweetsTableController {
 		tweetCleaner.add(new ReplaceStringCleanMethod("\"\\s*\"", ""));
 		tweetCleaner.add(new ReplaceStringCleanMethod(" $|^ ", ""));
 		// supression des doubles espace et espaces insécables
-		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0|", " "));
+		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0", " "));
 
 		
 
@@ -62,11 +65,14 @@ public class TweetsTableController {
 		for(Tweet tweet : tweetsTableModel){
 			if(tweetsBase.contains(tweet.getId()))
 				System.out.println(tweet.getId() + " : Tweet déjà présent");
-			else
+			else{
 				tweet.clean(tweetCleaner);
+				classificator.setAnnotation(tweet);
 				tweetsBase.addTweet(tweet);
+			}
 		}
 		updateTableModel(new ArrayList());
+		tweetsBase.updateBaseModel();
 	}
 	
 	public void toCSVFile() throws IOException {
@@ -96,7 +102,11 @@ public class TweetsTableController {
 		tweetsTableModel.updateTableModel(validTweetList);
 	}
 
-	public TableModel getModel() {
+	public TableModel getTableModel() {
 		return tweetsTableModel;
+	}
+	
+	public TableModel getBaseModel() {
+		return tweetsBase;
 	}
 }

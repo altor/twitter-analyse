@@ -1,3 +1,4 @@
+package twitter;
 import java.util.Date;
 
 import twitter.Tweet;
@@ -11,7 +12,6 @@ public class MockedTweet extends Tweet {
 
 
 	protected String []csvLine;
-
 	
 	
 	// ICI on crée un faux tableau de tweet
@@ -19,8 +19,19 @@ public class MockedTweet extends Tweet {
 		super(magicTransformation(userName, tweetText));
 	}
 	
+	public MockedTweet(String userName, String text, String lang) {
+		this(userName, text);
+		this.lang = lang;
+		
+	}
+	
+	public MockedTweet(String text) {
+		this("toto", text);		
+	}
+
 	public static String[] magicTransformation(String userName, String tweetText){
-		String[] csvLine = {"0", userName, tweetText, "", "-1"};
+		Date date = new Date(0);
+		String[] csvLine = {"0", userName, tweetText, date.toString(), "-1"};
 		return csvLine;
 	}
 	

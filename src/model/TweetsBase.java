@@ -3,9 +3,16 @@ package model;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 import twitter.Tweet;
 import twitter4j.Status;
@@ -14,15 +21,18 @@ import com.opencsv.CSVReader;
 
 
 
-public class TweetsBase implements Iterable<Tweet> {
+public class TweetsBase extends AbstractTableModel implements Iterable<Tweet>{
 
+	private final String[] columnName = { "User", "Text", "Annotation" };
+	protected List <Tweet> tweetList;
+	protected TreeSet<Long> tweetIds;
 	
-	protected HashMap<Long, Tweet> tweetHashMap;
 	protected String csvFileName;
 	
 public TweetsBase() throws IOException{
 		
-		tweetHashMap = new HashMap();
+		tweetList = new ArrayList<>();
+		tweetIds = new TreeSet<>();
 	}
 	
 	/**
@@ -31,39 +41,70 @@ public TweetsBase() throws IOException{
 	 * @throws IOException
 	 */
 	public TweetsBase(List<String[]> csvLines) throws IOException{
+		tweetIds = new TreeSet<>();
+		tweetList = new ArrayList();
 		
-		tweetHashMap = new HashMap();
 	    for (String[] nextLine : csvLines) {
 	    	Tweet tweet = new Tweet(nextLine);
-	        putTweet(tweet);
+	        addTweet(tweet);
 	     }
 	}
 	
 	/**
 	 * Ajoute un Tweet dans la base de Tweet
 	 * @param tweet le tweet à ajouter
-	 * @throws TweetAlreadyPresentException si le tweet est déjà présent dans la base
 	 */
 	public void addTweet(Tweet tweet){
-		putTweet(tweet);
+		tweetIds.add(tweet.getId());
+		tweetList.add(tweet);
 	}
 	
 	public boolean contains(Long id) {
-		return tweetHashMap.containsKey(id);
-	}
-	
-	
-	private void putTweet(Tweet tweet){
-		tweetHashMap.put(tweet.getId(), tweet);
+		return tweetIds.contains(id);
 	}
 	
 	@Override
 	public Iterator<Tweet> iterator() {
-		return tweetHashMap.values().iterator();
+		return tweetList.iterator();
 	}
 
-	
+	@Override
+	public int getColumnCount() {
+		return 3;
+	}
 
+	@Override
+	public String getColumnName(int columnIndex) {
+		return this.columnName[columnIndex];
+	}
 
+	@Override
+	public int getRowCount() {
+		return tweetList.size();
+	}
 
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		Tweet tweet = tweetList.get(rowIndex);
+		switch (columnIndex) {
+
+		case 0:
+			return tweet.getUserName();
+		case 1:
+			return tweet.getText();
+		case 2:
+			return tweet.getAnnotation();
+		default:
+			throw (new IllegalArgumentException());
+		}
+	}
+
+	@Override
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+		return false;
+	}
+
+	public void updateBaseModel() {
+		fireTableDataChanged();		
+	}
 }

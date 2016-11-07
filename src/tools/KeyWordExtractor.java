@@ -12,7 +12,7 @@ public class KeyWordExtractor {
 	private String langue;
 	
 	
-	public String[] getListeMots(String fichier, String langue) {
+	public static String[] getListeMots(String fichier, String langue) {
 		ArrayList<String> lignes = new ArrayList<String>();
 		
 		try{
