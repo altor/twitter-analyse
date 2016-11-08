@@ -30,19 +30,14 @@ public class TweetsTableController {
 	protected AbstractClassification classificator;
 	
 	
-	public TweetsTableController(String csvFileName, AbstractClassification classificator) throws IOException{
-		FileReader file = null;
-		this.classificator = classificator;
-		try {
-			file = new FileReader(csvFileName);
-			CSVReader reader = new CSVReader(new FileReader(csvFileName), '\t');
-			this.tweetsBase = new TweetsBase(reader.readAll());
-		} catch (FileNotFoundException e) {
-			tweetsBase = new TweetsBase();
-		}
-		this.tweetsTableModel = new TweetsTableModel();
+	public TweetsTableController(String csvFileName, TweetsBase tweetsBase, AbstractClassification classificator) throws IOException{
+	
 		this.csvFileName = csvFileName;
-		
+		this.tweetsBase = tweetsBase;
+		this.classificator = classificator;
+
+		this.tweetsTableModel = new TweetsTableModel();
+
 		tweetCleaner = new TextCleaner();
 		// supression des doubles espace et espaces insécables
 		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0", " "));
