@@ -14,7 +14,7 @@ public class AbstractDistance {
 	}
 	
 	public float distance(Tweet tweet1, Tweet tweet2){
-		return stringMetric.getSimilarity(tweet1.getText(), tweet2.getText());
+		return 1/(stringMetric.getSimilarity(tweet1.getText(), tweet2.getText()));
 	}
 
 }
