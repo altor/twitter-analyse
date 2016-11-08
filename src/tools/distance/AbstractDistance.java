@@ -1,9 +1,20 @@
 package tools.distance;
 
+import java.util.List;
+
 import twitter.Tweet;
+import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
 
-public interface AbstractDistance {
+public class AbstractDistance {
 
-	public int distance(Tweet tweet1, Tweet tweet2);
+	protected AbstractStringMetric stringMetric;
+	
+	public AbstractDistance(AbstractStringMetric stringMetric){
+		this.stringMetric = stringMetric;
+	}
+	
+	public float distance(Tweet tweet1, Tweet tweet2){
+		return stringMetric.getSimilarity(tweet1.getText(), tweet2.getText());
+	}
 
 }
