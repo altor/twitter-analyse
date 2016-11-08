@@ -107,4 +107,8 @@ public TweetsBase() throws IOException{
 	public void updateBaseModel() {
 		fireTableDataChanged();		
 	}
+	
+	public Tweet getTweet(int i) {
+		return this.tweetList.get(i);
+	}
 }
