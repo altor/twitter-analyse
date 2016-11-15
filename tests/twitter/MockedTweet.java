@@ -15,25 +15,33 @@ public class MockedTweet extends Tweet {
 	
 	
 	// ICI on crée un faux tableau de tweet
-	public MockedTweet(String userName, String tweetText){
-		super(magicTransformation(userName, tweetText));
+	public MockedTweet(String userName, String tweetText, int annotation){
+		super(magicTransformation(userName, tweetText, annotation));
 	}
 	
+	
 	public MockedTweet(String userName, String text, String lang) {
-		this(userName, text);
+		this(userName, text, -1);
 		this.lang = lang;
 		
 	}
 	
-	public MockedTweet(String text) {
-		this("toto", text);		
+	public MockedTweet(String text, int annotation){
+		this("toto", text, annotation);
 	}
+	
+	public MockedTweet(String text) {
+		this("toto", text, -1);		
+	}
+	
 
-	public static String[] magicTransformation(String userName, String tweetText){
+	public static String[] magicTransformation(String userName, String tweetText, int annotation){
 		Date date = new Date(0);
 		String[] csvLine = {"0", userName, tweetText, date.toString(), "-1"};
 		return csvLine;
 	}
+	
+	
 	
 	
 

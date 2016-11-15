@@ -22,7 +22,7 @@ import view.Window;
 
 public class Main {
 
-	public static void main(String[] args) throws TwitterException {
+	public static void main(String[] args) throws TwitterException, IOException {
 
 		// lancement de L'API Twitter (conexion)
 		TwitterAPI twitterAPI = new TwitterAPI();
