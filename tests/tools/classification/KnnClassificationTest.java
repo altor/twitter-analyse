@@ -31,12 +31,21 @@ public class KnnClassificationTest extends AbstractClassificationTest {
 		tweetBase.addTweet(tweet3);
 		tweetBase.addTweet(tweet4);
 		
-		int k = 3;
+		int k = 2;
+		
 		this.classificator = new KnnClassification(distance, tweetBase, k);
 	}
 	
+	/*
+	@Test
+	public void plusProcheVoisinTest() {
+		classificator.
+		assertEquals(classificator.getAnnotation(tweet), annotation);
+	}
+	*/
 	@Test
 	public void getAnnotationTest() {
+		// A CALCULER
 		textTest("Tout est impossible jusqu'à ce que quelqu'un le fasse", 5);
 	}
 
