@@ -70,15 +70,17 @@ public class KnnClassification extends AbstractClassification {
 
 		}
 		
-		float annotation = Math.round((float)sommeAnnotations / (float)tweetsVoisins.size();
+		float annotation = Math.round((float)sommeAnnotations / (float)tweetsVoisins.size());
 		
 		double distanceToZero = annotation * annotation;
 		double distanceToTwo = Math.pow(annotation - 2, 2);
 		double distanceToFour = Math.pow(annotation - 4, 2);
 		
-		if(distanceToZero < distanceToTwo && distanceTo)
-		
-		return Math.round(annotation);
+		if(distanceToZero < distanceToTwo && distanceToZero < distanceToFour)
+			return 0;
+		if(distanceToTwo < distanceToFour)
+			return 2;
+		return 4;
 	}
 	
 	

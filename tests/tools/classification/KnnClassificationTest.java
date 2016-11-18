@@ -57,7 +57,7 @@ public class KnnClassificationTest extends AbstractClassificationTest {
 	}
 	
 	@Test public void betweenGetannotaitonText(){
-		textTest("zero est possible", 0);
+		textTest("zero est possible", 2);
 
 	}
 
