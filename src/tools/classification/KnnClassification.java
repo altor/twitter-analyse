@@ -66,10 +66,18 @@ public class KnnClassification extends AbstractClassification {
 		List<Tweet> tweetsVoisins = this.plusProcheVoisin(tweet);
 		for (int i = 0; i < tweetsVoisins.size(); i++) {
 			sommeAnnotations += tweetsVoisins.get(i).getAnnotation();
+			System.out.println(sommeAnnotations);
+
 		}
 		
-		float annotation;
-		annotation = (float)sommeAnnotations / (float)tweetsVoisins.size();
+		float annotation = Math.round((float)sommeAnnotations / (float)tweetsVoisins.size();
+		
+		double distanceToZero = annotation * annotation;
+		double distanceToTwo = Math.pow(annotation - 2, 2);
+		double distanceToFour = Math.pow(annotation - 4, 2);
+		
+		if(distanceToZero < distanceToTwo && distanceTo)
+		
 		return Math.round(annotation);
 	}
 	

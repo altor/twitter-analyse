@@ -37,7 +37,7 @@ public class MockedTweet extends Tweet {
 
 	public static String[] magicTransformation(String userName, String tweetText, int annotation){
 		Date date = new Date(0);
-		String[] csvLine = {"0", userName, tweetText, date.toString(), "-1"};
+		String[] csvLine = {"0", userName, tweetText, date.toString(), Integer.toString(annotation)};
 		return csvLine;
 	}
 	

@@ -4,7 +4,12 @@ package twitter;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -58,6 +63,26 @@ public class Tweet {
 		return this.annotation;
 	}
 
+	/**
+	 * Transforme le tweet en une table de hashage contenant la liste des mot du tweet associé a son nombre d'occurence dans le texte du tweet
+	 * @return la table de hashage
+	 */
+	public Map <String, Integer> toMap(){
+		Map<String, Integer> map = new HashMap<>();
+		
+		for(String word : Arrays.asList(tweetText.split("\\s+"))){
+			if(map.containsKey(word)){
+				Integer i = map.get(word) + 1;
+				map.put(word, i);
+			}
+			else
+				map.put(word, new Integer(1));
+		}
+		
+		
+		return map;
+	}
+	
 	public boolean containsValidEmoticone() {
 		ArrayList<Pattern> positiveEmoticonsPatternList = new ArrayList<>();
 
