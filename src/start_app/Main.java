@@ -23,10 +23,6 @@ import view.Window;
 public class Main {
 
 	public static void main(String[] args) throws TwitterException, IOException {
-
-		// lancement de L'API Twitter (conexion)
-		TwitterAPI twitterAPI = new TwitterAPI();
-		AbstractClassification classificator = null;
 		
 		// Vérification du Nombre d'Argument
 		if(args.length < 2){
@@ -34,48 +30,14 @@ public class Main {
 			System.exit(1);
 		}
 		
-		// Initialisation de la base de Tweet
-		TweetsBase tweetsBase;
-		FileReader file = null;
-		String csvFileName = args[0];
-		try {
-			file = new FileReader(csvFileName);
-			CSVReader reader = new CSVReader(new FileReader(csvFileName), '\t');
-			tweetsBase = new TweetsBase(reader.readAll());
-		} catch (FileNotFoundException e) {
-			tweetsBase = new TweetsBase();
-		}
-		
-		
-		// Création du classificateur en fonction des arguments
-		if(args[1].equals("naif")){
-			if(args.length != 4){
-				System.err.println("args : naif fichier_mot_positifs fichier_mot_negatif");
-				System.exit(1);
-			}
-			String [] goodKeyWords = KeyWordExtractor.getListeMots(args[2], "FR");
-			String [] badKeyWords = KeyWordExtractor.getListeMots(args[3], "FR");
-
-			classificator = new NaiveClassifitation(goodKeyWords, badKeyWords);
-		}
-		if(args[1].equals("knn")){
-			if(args.length != 4){
-				System.err.println("args : knn k distanceName");
-				System.exit(1);
-			}
-			int k = Integer.parseInt(args[2]);
-			if(args[3].equals("levenshtein"))
-				classificator = new KnnClassification(new AbstractDistance(new Levenshtein()), tweetsBase, k);
-		}
-		else{
-			System.err.println("Argument " + args[1] + " inconnu");
-			System.exit(1);
-		}
+		TwitterAPI twitterAPI = new TwitterAPI();
+		TweetsBase tweetsBase = LaunchConfiguration.getTweetBase(args, 0);
+		AbstractClassification classifier = LaunchConfiguration.getClassification(args, 1, tweetsBase);
 		
 		// Lancement du controlleur
 		TweetsTableController controller = null;
 		try {
-			controller = new TweetsTableController("tweetsBase.csv", tweetsBase, classificator);
+			controller = new TweetsTableController(args[0], tweetsBase, classifier);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);
