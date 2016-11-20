@@ -18,47 +18,77 @@ public class BayesClassification extends AbstractClassification {
 	private Map<String, Integer> negativeTweets;
 	private Map<String, Integer> neutreTweets;
 	
-	public BayesClassification(TweetsBase t) {  		
-		this.negativeTweets = new HashMap<String, Integer>();
+	// tweetsBase est la base d'apprentissage, cad noté à la main
+	public BayesClassification(TweetsBase tweetsBase) {
+		this.positiveTweets = new HashMap<>();
+		this.negativeTweets = new HashMap<>();
+		this.neutreTweets = new HashMap<>();
 		
-		// On compte de tweet positive, negatif et neutre
-		for (Tweet tweet: t){
+		// On parcourt la tweetsBase 
+		for (Tweet tweet : tweetsBase) {
+			// On transforme ce tweet en Map
+			Map<String, Integer> tweetMap;
+			tweetMap = tweet.toMap();
+			
 			if (tweet.getAnnotation() == 0) {
 				nbNegativeTweets++;
+				negativeTweets = AddTweet(tweetMap, negativeTweets);
 			}
-			if (tweet.getAnnotation() == 2) {
+			else if (tweet.getAnnotation() == 2) {
 				nbNeutreTweets++;
+				neutreTweets = AddTweet(tweetMap, neutreTweets);
 			}
-			if (tweet.getAnnotation() == 4) {
+			else { // tweet.getAnnotation() == 4
 				nbPositiveTweets++;
+				positiveTweets = AddTweet(tweetMap, positiveTweets);	
 			}
 		}
-		
-		/*
-		for (Tweet tweet: t){
-			if (tweet.getAnnotation() == 0) {
-				positiveTweets
-			}
-			if (tweet.getAnnotation() == 2) {
-				
-			}
-			if (tweet.getAnnotation() == 4) {
-				
-			}
-		}
-		*/
-		
-		
-		//this.positiveTweets = t
-		//this.negativeTweets = 
-		//this.neutreTweets = 
-				
 	}
 	
-	
+	public static Map<String,Integer> AddTweet(Map<String, Integer> tweetMap, Map<String, Integer> tweetsMap){
+		for(String word : tweetMap.keySet()) {
+			if(tweetsMap.containsKey(word)){
+				Integer valeur = tweetsMap.get(word) + tweetMap.get(word);
+				tweetsMap.put(word, valeur);
+			}
+			else {
+				tweetsMap.put(word, tweetMap.get(word));
+			}
+		}
+		return tweetsMap;
+	}
 	
 	@Override
 	public int getAnnotation(Tweet tweet) {
+		// On transforme ce tweet en Map
+		Map<String, Integer> tweetMap;
+		tweetMap = tweet.toMap();
+		
+		int probaNegatif;
+		int probaNeutre;
+		int probaPositif = 1;
+		
+		// Pour positif
+		// On parcourt le tweetMap
+		/*for(String word : tweetMap.keySet()) {
+			// 
+			if () {
+				probaPositif = 
+			}
+
+			
+			
+		}*/
+		
+
+		
+		// pour chaque classe
+		// P(T|positif) = 2 * 5/nb_total * ... pour chaque mots
+		// tweet : Bonjour 2
+		// positive : Bonjour 5
+		// 
+		
+		
 		// TODO Auto-generated method stub
 		return 0;
 	}
