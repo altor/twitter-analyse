@@ -13,7 +13,11 @@ public class BayesClassification extends AbstractClassification {
 	private int nbPositiveTweets = 0;
 	private int nbNegativeTweets = 0;
 	private int nbNeutreTweets = 0;
-
+	
+	private int nbPositiveWords = 0;
+	private int nbNegativeWords = 0;
+	private int nbNeutreWords = 0;	
+	
 	private Map<String, Integer> positiveTweets;
 	private Map<String, Integer> negativeTweets;
 	private Map<String, Integer> neutreTweets;
@@ -32,20 +36,33 @@ public class BayesClassification extends AbstractClassification {
 			
 			if (tweet.getAnnotation() == 0) {
 				nbNegativeTweets++;
-				negativeTweets = AddTweet(tweetMap, negativeTweets);
+				negativeTweets = addTweet(tweetMap, negativeTweets);
 			}
 			else if (tweet.getAnnotation() == 2) {
 				nbNeutreTweets++;
-				neutreTweets = AddTweet(tweetMap, neutreTweets);
+				neutreTweets = addTweet(tweetMap, neutreTweets);
 			}
 			else { // tweet.getAnnotation() == 4
 				nbPositiveTweets++;
-				positiveTweets = AddTweet(tweetMap, positiveTweets);	
+				positiveTweets = addTweet(tweetMap, positiveTweets);	
 			}
 		}
+		
+		// On remplit les valeurs de somme
+		nbPositiveWords = getValueSum(positiveTweets);
+		nbNegativeWords = getValueSum(negativeTweets);
+		nbNeutreWords = getValueSum(neutreTweets);
 	}
 	
-	public static Map<String,Integer> AddTweet(Map<String, Integer> tweetMap, Map<String, Integer> tweetsMap){
+	public static int getValueSum(Map<String,Integer> map) {
+		int sum = 0;
+		for(String word : map.keySet()) {
+			sum += map.get(word);
+		}
+		return sum;
+	}
+	
+	public static Map<String,Integer> addTweet(Map<String, Integer> tweetMap, Map<String, Integer> tweetsMap){
 		for(String word : tweetMap.keySet()) {
 			if(tweetsMap.containsKey(word)){
 				Integer valeur = tweetsMap.get(word) + tweetMap.get(word);
@@ -64,33 +81,61 @@ public class BayesClassification extends AbstractClassification {
 		Map<String, Integer> tweetMap;
 		tweetMap = tweet.toMap();
 		
-		int probaNegatif;
-		int probaNeutre;
-		int probaPositif = 1;
+		// GERER LE CAS SI TWEETMAP EST VIDE???
 		
-		// Pour positif
-		// On parcourt le tweetMap
-		/*for(String word : tweetMap.keySet()) {
-			// 
-			if () {
-				probaPositif = 
+		float negativeProbability = 1;
+		float positiveProbability = 1;
+		float neutralProbability = 1;
+		
+		// On remplit positiveProbability
+		for(String word : tweetMap.keySet()) {
+			// si word appartient aux mots positifs
+			if (this.positiveTweets.containsKey(word)) {
+				positiveProbability *= this.positiveTweets.get(word)/this.nbPositiveWords;
 			}
-
+			else {
+				positiveProbability *= 1 / (this.nbPositiveWords + (this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords));
+			}
+		}
+		positiveProbability *= this.nbPositiveTweets / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);
+		
+		// On remplit negativeProbability
+		for(String word : tweetMap.keySet()) {	
+			// si word appartient aux mots negativs
+			if (this.negativeTweets.containsKey(word)) {
+				negativeProbability *= this.negativeTweets.get(word)/this.nbNegativeWords;
+			}
+			else {
+				negativeProbability *= 1 / (this.nbNegativeWords + (this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords));
+			}
+		}
+		negativeProbability *= this.nbNegativeTweets / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);
+		
+		// On remplit neutralProbability
+		for(String word : tweetMap.keySet()) {
 			
-			
-		}*/
+			// si word appartient aux mots neutres
+			if (this.positiveTweets.containsKey(word)) {
+				neutralProbability *= this.neutreTweets.get(word)/this.nbNeutreWords;
+			}
+			else {
+				neutralProbability *= 1 / (this.nbNeutreWords + (this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords));
+			}
+		}
+		neutralProbability *= this.nbNeutreTweets / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);
 		
-
 		
-		// pour chaque classe
-		// P(T|positif) = 2 * 5/nb_total * ... pour chaque mots
-		// tweet : Bonjour 2
-		// positive : Bonjour 5
-		// 
-		
-		
-		// TODO Auto-generated method stub
-		return 0;
+		if (negativeProbability > positiveProbability && negativeProbability > neutralProbability) {
+			return 0;
+		}
+		else if (positiveProbability > negativeProbability && positiveProbability > neutralProbability) {
+			return 4;
+		}
+		else {
+			return 2;
+		}
 	}
+	
+
 
 }
