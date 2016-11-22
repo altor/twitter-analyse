@@ -51,9 +51,9 @@ public class TweetsTableController {
 		// supression des doubles espace et espaces insécables
 		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0", " "));
 		//supression des sommes avec $ 
-		tweetCleaner.add(new ReplaceStringCleanMethod("$[0-9]*|[0-9]*.[0-9]*", "$XX"));
+		//tweetCleaner.add(new ReplaceStringCleanMethod("$[0-9]*|[0-9]*.[0-9]*", "$XX"));
 		//supression des sommes avec €
-		tweetCleaner.add(new ReplaceStringCleanMethod("€[0-9]*|€[0-9]*.[0-9]*", "€XX"));
+		//tweetCleaner.add(new ReplaceStringCleanMethod("€[0-9]*|€[0-9]*.[0-9]*", "€XX"));
 
 		
 	}
@@ -62,7 +62,7 @@ public class TweetsTableController {
 		for(Tweet tweet : tweetsTableModel){
 			if(tweetsBase.contains(tweet.getId()))
 				System.out.println(tweet.getId() + " : Tweet déjà présent");
-			else{
+			else if(tweet.getAnnotation() != -1){
 				tweet.clean(tweetCleaner);
 				classificator.setAnnotation(tweet);
 				tweetsBase.addTweet(tweet);
