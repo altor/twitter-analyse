@@ -37,8 +37,8 @@ public class TweetsTableView extends JTable implements TableModelListener {
 		JComboBox comboBox = new JComboBox();
 		comboBox.addItem("-1");
 		comboBox.addItem("0");
-		comboBox.addItem("1");
 		comboBox.addItem("2");
+		comboBox.addItem("4");
 		c.setCellEditor(new DefaultCellEditor(comboBox));
 	}
 
