@@ -8,6 +8,7 @@
 - faire liste de mots inutiles (déterminent, pronom, ...) (Sofiane)
 - fonction de netoyage enlevant les mots inutiles (Sofiane)
 - debugguer netoyage (Sofiane)
+- transformer les texte en minuscule
 
 ## Test
 

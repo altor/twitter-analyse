@@ -55,7 +55,7 @@ public class TweetsTableController {
 		//supression des sommes avec €
 		//tweetCleaner.add(new ReplaceStringCleanMethod("€[0-9]*|€[0-9]*.[0-9]*", "€XX"));
 
-		
+		 
 	}
 	
 	public void loadToBase(){
