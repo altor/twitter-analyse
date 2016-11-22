@@ -49,7 +49,7 @@ public class Window extends JFrame {
 		JTabbedPane tabs = new JTabbedPane();
 		
 		
-		this.setSize(500, 300);
+		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		tabs.addTab("Request", requestTab());
@@ -59,6 +59,7 @@ public class Window extends JFrame {
 		this.getContentPane().add(tabs);
 		
 		this.pack();
+		this.setSize(1000, 300);
 		this.setVisible(true);
 	}
 	
