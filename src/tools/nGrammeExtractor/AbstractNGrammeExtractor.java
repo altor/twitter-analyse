@@ -1,8 +1,8 @@
-package tools.nGrameExtractor;
+package tools.nGrammeExtractor;
 
 import java.util.Map;
 
-public abstract class AbstractNGrameExtractor {
+public abstract class AbstractNGrammeExtractor {
 
 	public abstract Map <String, Integer> extract(String text);
 
