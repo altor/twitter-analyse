@@ -29,8 +29,7 @@ public class TweetsBase extends AbstractTableModel implements Iterable<Tweet>{
 	
 	protected String csvFileName;
 	
-public TweetsBase() throws IOException{
-		
+	public TweetsBase() throws IOException{	
 		tweetList = new ArrayList<>();
 		tweetIds = new TreeSet<>();
 	}

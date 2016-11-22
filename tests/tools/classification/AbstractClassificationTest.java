@@ -13,7 +13,7 @@ public class AbstractClassificationTest {
 	protected AbstractClassification classificator;
 
 	protected void textTest(String text, int annotation) {
-		Tweet tweet = new MockedTweet("toto", text);
+		Tweet tweet = new MockedTweet(text);
 		assertEquals(classificator.getAnnotation(tweet), annotation);
 	}
 

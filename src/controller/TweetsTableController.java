@@ -31,19 +31,14 @@ public class TweetsTableController {
 	protected AbstractClassification classificator;
 	
 	
-	public TweetsTableController(String csvFileName, AbstractClassification classificator) throws IOException{
-		FileReader file = null;
-		this.classificator = classificator;
-		try {
-			file = new FileReader(csvFileName);
-			CSVReader reader = new CSVReader(new FileReader(csvFileName), '\t');
-			this.tweetsBase = new TweetsBase(reader.readAll());
-		} catch (FileNotFoundException e) {
-			tweetsBase = new TweetsBase();
-		}
-		this.tweetsTableModel = new TweetsTableModel();
+	public TweetsTableController(String csvFileName, TweetsBase tweetsBase, AbstractClassification classificator) throws IOException{
+	
 		this.csvFileName = csvFileName;
-		
+		this.tweetsBase = tweetsBase;
+		this.classificator = classificator;
+
+		this.tweetsTableModel = new TweetsTableModel();
+
 		tweetCleaner = new TextCleaner();
 		// supression des doubles espace et espaces insécables
 		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0", " "));
@@ -56,8 +51,16 @@ public class TweetsTableController {
 		tweetCleaner.add(new ReplaceStringCleanMethod(" $|^ ", ""));
 		// supression des doubles espace et espaces insécables
 		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0", " "));
+
+
 		//supression des sommes avec $ et €
 		tweetCleaner.add(new ReplaceStringCleanMethod("[-#@\n()0-9+&@/%?=~_!:,\\.;\"*><^…]|RT", ""));
+
+		//supression des sommes avec $ 
+		//tweetCleaner.add(new ReplaceStringCleanMethod("$[0-9]*|[0-9]*.[0-9]*", "$XX"));
+		//supression des sommes avec €
+		//tweetCleaner.add(new ReplaceStringCleanMethod("€[0-9]*|€[0-9]*.[0-9]*", "€XX"));
+
 
 	}
 	
@@ -68,7 +71,7 @@ public class TweetsTableController {
 		for(Tweet tweet : tweetsTableModel){
 			if(tweetsBase.contains(tweet.getId()))
 				System.out.println(tweet.getId() + " : Tweet déjà présent");
-			else{
+			else if(tweet.getAnnotation() != -1){
 				tweet.clean(tweetCleaner);
 				classificator.setAnnotation(tweet);
 				tweetsBase.addTweet(tweet);
