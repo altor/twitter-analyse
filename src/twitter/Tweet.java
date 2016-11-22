@@ -67,7 +67,7 @@ public class Tweet {
 	 * Transforme le tweet en une table de hashage contenant la liste des mot du tweet associé a son nombre d'occurence dans le texte du tweet
 	 * @return la table de hashage
 	 */
-	public Map <String, Integer> toMap(){
+	public Map<String, Integer> toMap(){
 		Map<String, Integer> map = new HashMap<>();
 		
 		for(String word : Arrays.asList(tweetText.split("\\s+"))){
@@ -80,6 +80,21 @@ public class Tweet {
 		}
 		
 		
+		return map;
+	}
+	
+	/**
+	 * Transform le tweet en une table de hashage contenant la liste des bi-grammes du tweet associé a son nombre d'occurence dans le texte du tweet
+	 * @return la table de hashage
+	 */
+	public Map<String, Integer> toMapBigramme(){
+		
+		Map<String, Integer> map = new HashMap<>();
+		
+		String[] tweetTextTable;
+		tweetTextTable = this.tweetText.split(" ");
+		
+				
 		return map;
 	}
 	
