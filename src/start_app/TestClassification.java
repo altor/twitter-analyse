@@ -59,8 +59,25 @@ public class TestClassification {
 	}
 
 	private static double classifier(List<Tweet> tweetList, AbstractClassification classifier){
-		
-		return 0;
+
+		int  nb_Faux =0;
+		double taux =0;
+		for (Tweet tweet :tweetList){
+			int annotation = tweet.getAnnotation();
+			int classifierAnnotation = classifier.getAnnotation(tweet);
+
+
+			if(annotation !=classifierAnnotation){
+
+				nb_Faux++;
+			}
+		}
+
+		int nb_total=tweetList.size();
+
+		taux = nb_Faux /nb_total; 			
+		return taux;
+
 	}
 	
 }

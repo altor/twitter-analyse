@@ -54,9 +54,7 @@ public class TweetsTableController {
 		// supression des doubles espace et espaces insécables
 		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0", " "));
 		//supression des sommes avec $ et €
-
 		tweetCleaner.add(new ReplaceStringCleanMethod("[-#@$€\n()0-9+&@/%?=~_!:,\\.;\"*><^…]|RT", ""));
-
 		
 	}
 	
