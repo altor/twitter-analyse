@@ -52,6 +52,7 @@ public class TwitterAPI {
 		 * ); List<Status> l = new ArrayList<Status>(); l.add(s); return l;
 		 */
 		Query query = new Query(request);
+		query.setCount(100);
 		List<Tweet> tweetList = new ArrayList<>();
 		for (Status status : this.twitter.search(query).getTweets())
 			tweetList.add(new Tweet(status));

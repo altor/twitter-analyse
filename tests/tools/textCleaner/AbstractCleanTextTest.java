@@ -1,4 +1,4 @@
-package controller.textCleaner;
+package tools.textCleaner;
 
 import static org.junit.Assert.*;
 
