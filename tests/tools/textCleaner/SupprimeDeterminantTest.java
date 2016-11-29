@@ -22,11 +22,11 @@ public class SupprimeDeterminantTest {
 	public void test() {
 		CleanMethod cm = new SupprimeDeterminant();
 		
-		assertEquals(clean("manger des pates"), "manger pate");
-		assertEquals(clean("manger des pates des"), "manger pate");
-		assertEquals(clean("manger des pates au fromage"), "manger pate fromage");
-		assertEquals(clean("manger des pates au fromage et a la tomate"), "manger pate fromage tomate");
-		assertEquals(clean("manger des pates au fromage et a la tomate et a la bolognaise"), "manger pate fromage tomate bolognaise");
+		assertEquals(clean("manger des pates"), "manger pates");
+		assertEquals(clean("manger des pates des"), "manger pates");
+		assertEquals(clean("manger des pates au fromage"), "manger pates fromage");
+		assertEquals(clean("manger des pates au fromage et a la tomate"), "manger pates fromage tomate");
+		assertEquals(clean("manger des pates au fromage et a la tomate et a la bolognaise"), "manger pates fromage tomate bolognaise");
 	
 	}
 

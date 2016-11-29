@@ -26,7 +26,9 @@ public abstract class AbstractBayesClassification extends AbstractClassification
 	protected AbstractNGrammeExtractor nGrammeExtractor;
 	
 	// tweetsBase est la base d'apprentissage, cad noté à la main
-	public AbstractBayesClassification(TweetsBase tweetsBase) {
+	public AbstractBayesClassification(TweetsBase tweetsBase, AbstractNGrammeExtractor nGrammeExtractor) {
+		this.nGrammeExtractor = nGrammeExtractor;
+		
 		this.positiveTweets = new HashMap<>();
 		this.negativeTweets = new HashMap<>();
 		this.neutreTweets = new HashMap<>();
@@ -78,6 +80,12 @@ public abstract class AbstractBayesClassification extends AbstractClassification
 		return tweetsMap;
 	}
 	
+	public abstract int getPositiveProbability(Map<String, Integer> tweetMap);
+	
+	public abstract int getNegativeProbability(Map<String, Integer> tweetMap);
+	
+	public abstract int getNeutralProbability(Map<String, Integer> tweetMap);
+	
 	@Override
 	public int getAnnotation(Tweet tweet) {
 		// On transforme ce tweet en Map
@@ -86,46 +94,18 @@ public abstract class AbstractBayesClassification extends AbstractClassification
 		
 		// GERER LE CAS SI TWEETMAP EST VIDE???
 		
-		float negativeProbability = 1;
-		float positiveProbability = 1;
-		float neutralProbability = 1;
+		double negativeProbability;
+		double positiveProbability;
+		double neutralProbability;
 		
-		// On remplit positiveProbability
-		for(String word : tweetMap.keySet()) {
-			// si word appartient aux mots positifs
-			if (this.positiveTweets.containsKey(word)) {
-				positiveProbability *= this.positiveTweets.get(word)/this.nbPositiveWords;
-			}
-			else {
-				positiveProbability *= 1 / (this.nbPositiveWords + (this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords));
-			}
-		}
+		positiveProbability = getPositiveProbability(tweetMap);
 		positiveProbability *= this.nbPositiveTweets / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);
-		
-		// On remplit negativeProbability
-		for(String word : tweetMap.keySet()) {	
-			// si word appartient aux mots negativs
-			if (this.negativeTweets.containsKey(word)) {
-				negativeProbability *= this.negativeTweets.get(word)/this.nbNegativeWords;
-			}
-			else {
-				negativeProbability *= 1 / (this.nbNegativeWords + (this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords));
-			}
-		}
+				
+		negativeProbability = getNegativeProbability(tweetMap);
 		negativeProbability *= this.nbNegativeTweets / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);
 		
-		// On remplit neutralProbability
-		for(String word : tweetMap.keySet()) {
-			
-			// si word appartient aux mots neutres
-			if (this.positiveTweets.containsKey(word)) {
-				neutralProbability *= this.neutreTweets.get(word)/this.nbNeutreWords;
-			}
-			else {
-				neutralProbability *= 1 / (this.nbNeutreWords + (this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords));
-			}
-		}
-		neutralProbability *= this.nbNeutreTweets / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);
+		neutralProbability = getNeutralProbability(tweetMap);
+		neutralProbability *= this.nbNeutreTweets / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);		
 		
 		
 		if (negativeProbability > positiveProbability && negativeProbability > neutralProbability) {
