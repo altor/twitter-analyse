@@ -13,7 +13,13 @@ import tools.KeyWordExtractor;
 import tools.classification.AbstractClassification;
 import tools.classification.KnnClassification;
 import tools.classification.NaiveClassifitation;
+import tools.classification.bayes.BayesClassificationFrequence;
+import tools.classification.bayes.BayesClassificationPresence;
 import tools.distance.AbstractDistance;
+import tools.nGrammeExtractor.AbstractNGrammeExtractor;
+import tools.nGrammeExtractor.BiGrammeExtractor;
+import tools.nGrammeExtractor.UniAndBiGrammeExtractor;
+import tools.nGrammeExtractor.UniGrammeExtractor;
 import twitter.Tweet;
 import twitter.TwitterAPI;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.Levenshtein;
@@ -63,7 +69,7 @@ public class LaunchConfiguration {
 
 			return new NaiveClassifitation(goodKeyWords, badKeyWords);
 		}
-		if(args[1].equals("knn")){
+		else if(args[classificatorRank].equals("knn")){
 			if(args.length != classificatorRank + 3){
 				System.err.println("args : knn k distanceName");
 				System.exit(1);
@@ -72,10 +78,38 @@ public class LaunchConfiguration {
 			if(args[classificatorRank + 2].equals("levenshtein"))
 				return new KnnClassification(new AbstractDistance(new Levenshtein()), tweetsBase, k);
 		}
-
-		System.err.println("Classificateur " + args[classificatorRank] + " inconnu");
-		System.exit(1);
-
+		else if(args[classificatorRank].equals("bayes")){
+			if(args.length != classificatorRank + 3){
+				System.err.println("args : bayes kgrame frequence");
+				System.exit(1);
+			}
+			AbstractNGrammeExtractor nGrammeExtractor = null;
+			if(args[classificatorRank + 1].equals("bigramme"))
+				nGrammeExtractor = new BiGrammeExtractor();
+			else if(args[classificatorRank + 1].equals("uniandbigramme"))
+				nGrammeExtractor = new UniAndBiGrammeExtractor();
+			else if(args[classificatorRank + 1].equals("unigramme"))
+				nGrammeExtractor = new UniGrammeExtractor();
+			else{
+				System.err.println("args : nGrammeExtractor " + args[classificatorRank + 1] + "inconnu");
+				System.err.println("utilisable : \n\tbigramme\n\tuniandbigramme\n\tunigramme");
+				System.exit(1);
+			}
+			
+			if(args[classificatorRank + 2].equals("presence"))
+				return new BayesClassificationPresence(tweetsBase, nGrammeExtractor);
+			if(args[classificatorRank + 2].equals("frequence"))
+				return new BayesClassificationFrequence(tweetsBase, nGrammeExtractor);
+			else{
+				System.err.println("args : " +  args[classificatorRank + 1] + "inconnu");
+				System.err.println("utilisable : \n\tpresence\n\tfrequence\n\t");
+				System.exit(1);
+			}
+		}
+		else{
+			System.err.println("Classificateur " + args[classificatorRank] + " inconnu");
+			System.exit(1);
+		}
 		return null;
 	}
 	

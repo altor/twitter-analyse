@@ -20,62 +20,45 @@ public class TestClassification {
 		TwitterAPI twitterAPI = new TwitterAPI();
 		// Création de la liste des Tweet à classifier
 		List<Tweet> tweetList = LaunchConfiguration.getTweetListFromCSV(args, 0);
-		// Initialisation de la base de Tweet
-		TweetsBase tweetsBase = LaunchConfiguration.getTweetBase(args, 1);
+		
+		// Extraction des 3 listes de Tweet
+		List<Tweet> [] lists = splitKTweetList(tweetList, 3);
+		
+		double ea0, ea1, ea2;
+		
+		//Calcul de ea0
 		//Initialisation du classificateur
-		AbstractClassification classifier = LaunchConfiguration.getClassification(args, 2, tweetsBase);
+		List<Tweet> l1Ul2 = new ArrayList();
+		l1Ul2.addAll(lists[1]);
+		l1Ul2.addAll(lists[2]);
+		AbstractClassification classificateur = LaunchConfiguration.getClassification(args, 2, new TweetsBase(l1Ul2, true));
+		ea0 = classifier(l1Ul2, classificateur);
 		
-		int vraiPositif = 0;
-		int fauxPositif = 0;
-		int vraiNegatif = 0;
-		int fauxNegatif = 0;
-		int vraiNeutre = 0;
-		int fauxNeutre = 0;
+		//Calcul de ea1
+		//Initialisation du classificateur
+		List<Tweet> l0Ul2 = new ArrayList();
+		l0Ul2.addAll(lists[0]);
+		l0Ul2.addAll(lists[2]);
+		classificateur = LaunchConfiguration.getClassification(args, 2, new TweetsBase(l0Ul2, true));
+		ea1 = classifier(l0Ul2, classificateur);
 		
-		for(Tweet tweet : tweetList){
-			int annotation = tweet.getAnnotation();
-			classifier.setAnnotation(tweet);
-			int classifierAnnotation = tweet.getAnnotation();
-			
-			if(annotation == 4){
-				if(annotation != classifierAnnotation)
-					fauxPositif++;
-				else
-					vraiPositif++;
-			}
-			else if(annotation == 2){
-				if(annotation != classifierAnnotation)
-					fauxNeutre++;
-				else
-					vraiNeutre++;
-			}
-			
-			else if(annotation == 0){
-				if(annotation != classifierAnnotation)
-					fauxNegatif++;
-				else
-					vraiNegatif++;
-			}
-			
-			System.out.println("vrai positifs : " + vraiPositif + "\n" + 
-					"faux positifs : " + fauxPositif + "\n" + 
-					"vrai neutre : " + vraiNeutre + "\n" +
-					"faux neutre : " + fauxNeutre + "\n" + 
-					"vrai negatif : " + vraiNegatif + "\n" + 
-					"faux negatif : " + fauxNegatif + "\n");
-			System.exit(0);
-			
-		}
+		//Calcul de ea2
+		//Initialisation du classificateur
+		List<Tweet> l0Ul1 = new ArrayList();
+		l0Ul1.addAll(lists[0]);
+		l0Ul1.addAll(lists[1]);
+		classificateur = LaunchConfiguration.getClassification(args, 2, new TweetsBase(l0Ul1, true));
+		ea2 = classifier(l0Ul1, classificateur);
 		
-		
-
+		double e = (ea0 + ea1 + ea2) / 3;
+		System.out.println(e);
 	}
-	private List<Tweet>[] splitKTweetList(List<Tweet> tweetList, int k){
+	private static List<Tweet>[] splitKTweetList(List<Tweet> tweetList, int k){
 		
 		return null;
 	}
 
-	private double classifier(List<Tweet> tweetList, TweetsBase base, AbstractClassification classifier){
+	private static double classifier(List<Tweet> tweetList, AbstractClassification classifier){
 		
 		return 0;
 	}

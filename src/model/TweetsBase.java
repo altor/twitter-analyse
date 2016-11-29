@@ -49,6 +49,15 @@ public class TweetsBase extends AbstractTableModel implements Iterable<Tweet>{
 	     }
 	}
 	
+	public TweetsBase(List<Tweet> tweetList, boolean b) {
+		tweetIds = new TreeSet<>();
+		tweetList = new ArrayList();
+		
+	    for (Tweet tweet : tweetList) {
+	        addTweet(tweet);
+	     }
+	}
+	
 	/**
 	 * Ajoute un Tweet dans la base de Tweet
 	 * @param tweet le tweet à ajouter
