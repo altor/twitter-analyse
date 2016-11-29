@@ -14,6 +14,7 @@ import model.TweetsBase;
 import model.TweetsTableModel;
 import tools.classification.AbstractClassification;
 import tools.textCleaner.ReplaceStringCleanMethod;
+import tools.textCleaner.SupprimeDeterminant;
 import tools.textCleaner.TextCleaner;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
 
@@ -40,6 +41,7 @@ public class TweetsTableController {
 		this.tweetsTableModel = new TweetsTableModel();
 
 		tweetCleaner = new TextCleaner();
+		tweetCleaner.add(new SupprimeDeterminant());
 		// supression des doubles espace et espaces insécables
 		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0", " "));
 		// supression des références à un utilisateur
@@ -52,17 +54,10 @@ public class TweetsTableController {
 		// supression des doubles espace et espaces insécables
 		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0", " "));
 		//supression des sommes avec $ et €
-<<<<<<< HEAD
+
 		tweetCleaner.add(new ReplaceStringCleanMethod("[-#@$€\n()0-9+&@/%?=~_!:,\\.;\"*><^…]|RT", ""));
-=======
-		tweetCleaner.add(new ReplaceStringCleanMethod("[-#@\n()0-9+&@/%?=~_!:,\\.;\"*><^…]|RT", ""));
 
-		//supression des sommes avec $ 
-		//tweetCleaner.add(new ReplaceStringCleanMethod("$[0-9]*|[0-9]*.[0-9]*", "$XX"));
-		//supression des sommes avec €
-		//tweetCleaner.add(new ReplaceStringCleanMethod("€[0-9]*|€[0-9]*.[0-9]*", "€XX"));
->>>>>>> 389c06ffd5c06931d7d3f0e7f4fba47e6fd9c028
-
+		
 	}
 	
 	

@@ -5,18 +5,18 @@ import java.util.List;
 
 public class TextCleaner {
 	
-	protected List<ReplaceStringCleanMethod> cleanMethodList;
+	protected List<CleanMethod> cleanMethodList;
 	
 	public TextCleaner(){
 		cleanMethodList = new ArrayList<>();
 	}
 	
-	public void add(ReplaceStringCleanMethod cm){
+	public void add(CleanMethod cm){
 		cleanMethodList.add(cm);
 	}
 	
 	public String clean(String text){
-		for(ReplaceStringCleanMethod cm : cleanMethodList)
+		for(CleanMethod cm : cleanMethodList)
 			text = cm.clean(text);
 		return text;
 	}
