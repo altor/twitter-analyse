@@ -70,4 +70,14 @@ public class TestClassification {
 		
 
 	}
+	private List<Tweet>[] splitKTweetList(List<Tweet> tweetList, int k){
+		
+		return null;
+	}
+
+	private double classifier(List<Tweet> tweetList, TweetsBase base, AbstractClassification classifier){
+		
+		return 0;
+	}
+	
 }
