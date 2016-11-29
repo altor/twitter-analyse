@@ -43,6 +43,12 @@ public class Main {
 			System.exit(1);
 		}
 
+		System.out.println("tweet positif : " + tweetsBase.getNbPositiveTweet());
+		System.out.println("tweet neutre : " + tweetsBase.getNbNeutreTweet());
+		System.out.println("tweet negatif : " + tweetsBase.getNbNegativeTweet());
+
+
+		
 		// Création de la fenêtre d'interface
 		Window window = new Window(twitterAPI, controller);
 	}

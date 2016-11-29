@@ -28,7 +28,7 @@ public class TwitterAPI {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true).setOAuthConsumerKey(consumerKey).setOAuthConsumerSecret(consumerSecret)
 				.setOAuthAccessToken(accessToken).setOAuthAccessTokenSecret(accessTokenSecret)
-				.setHttpProxyHost("cache.univ-lille1.fr").setHttpProxyPort(3128)
+				//.setHttpProxyHost("cache.univ-lille1.fr").setHttpProxyPort(3128)
 				.setJSONStoreEnabled(true);
 
 		// Connexion à Twitter
@@ -52,6 +52,7 @@ public class TwitterAPI {
 		 * ); List<Status> l = new ArrayList<Status>(); l.add(s); return l;
 		 */
 		Query query = new Query(request);
+		query.setCount(100);
 		List<Tweet> tweetList = new ArrayList<>();
 		for (Status status : this.twitter.search(query).getTweets())
 			tweetList.add(new Tweet(status));

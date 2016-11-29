@@ -62,6 +62,39 @@ public class TweetsBase extends AbstractTableModel implements Iterable<Tweet>{
 		return tweetIds.contains(id);
 	}
 	
+	public int getNbPositiveTweet(){
+		int i = 0;
+		for(Tweet t : tweetList){
+			if(t.getAnnotation() == 4)
+				i++;
+		}
+		
+		return i;
+		
+	}
+	
+	public int getNbNegativeTweet(){
+		int i = 0;
+		for(Tweet t : tweetList){
+			if(t.getAnnotation() == 0)
+				i++;
+		}
+		
+		return i;
+		
+	}
+	
+	public int getNbNeutreTweet(){
+		int i = 0;
+		for(Tweet t : tweetList){
+			if(t.getAnnotation() == 2)
+				i++;
+		}
+		
+		return i;
+		
+	}
+	
 	@Override
 	public Iterator<Tweet> iterator() {
 		return tweetList.iterator();
