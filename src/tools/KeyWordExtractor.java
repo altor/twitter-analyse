@@ -12,6 +12,9 @@ public class KeyWordExtractor {
 	private String langue;
 	
 	
+	// getListeMots("determinant.txt", "")
+	// ['chaque', 'des']
+	
 	public static String[] getListeMots(String fichier, String langue) {
 		ArrayList<String> lignes = new ArrayList<String>();
 		

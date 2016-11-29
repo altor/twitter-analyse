@@ -1,29 +1,32 @@
-package tools.classification;
+package tools.classification.bayes;
 
 
 import java.util.HashMap;
 import java.util.Map;
 
 import model.TweetsBase;
-
+import tools.classification.AbstractClassification;
+import tools.nGrammeExtractor.AbstractNGrammeExtractor;
 import twitter.Tweet;
 
-public class BayesClassification extends AbstractClassification {
+public abstract class AbstractBayesClassification extends AbstractClassification {
 	
-	private int nbPositiveTweets = 0;
-	private int nbNegativeTweets = 0;
-	private int nbNeutreTweets = 0;
+	protected int nbPositiveTweets = 0;
+	protected int nbNegativeTweets = 0;
+	protected int nbNeutreTweets = 0;
 	
-	private int nbPositiveWords = 0;
-	private int nbNegativeWords = 0;
-	private int nbNeutreWords = 0;	
+	protected int nbPositiveWords = 0;
+	protected int nbNegativeWords = 0;
+	protected int nbNeutreWords = 0;	
 	
-	private Map<String, Integer> positiveTweets;
-	private Map<String, Integer> negativeTweets;
-	private Map<String, Integer> neutreTweets;
+	protected Map<String, Integer> positiveTweets;
+	protected Map<String, Integer> negativeTweets;
+	protected Map<String, Integer> neutreTweets;
+	
+	protected AbstractNGrammeExtractor nGrammeExtractor;
 	
 	// tweetsBase est la base d'apprentissage, cad noté à la main
-	public BayesClassification(TweetsBase tweetsBase) {
+	public AbstractBayesClassification(TweetsBase tweetsBase) {
 		this.positiveTweets = new HashMap<>();
 		this.negativeTweets = new HashMap<>();
 		this.neutreTweets = new HashMap<>();
@@ -32,7 +35,7 @@ public class BayesClassification extends AbstractClassification {
 		for (Tweet tweet : tweetsBase) {
 			// On transforme ce tweet en Map
 			Map<String, Integer> tweetMap;
-			tweetMap = tweet.toMap();
+			tweetMap = nGrammeExtractor.extract(tweet.getText());
 			
 			if (tweet.getAnnotation() == 0) {
 				nbNegativeTweets++;
@@ -79,7 +82,7 @@ public class BayesClassification extends AbstractClassification {
 	public int getAnnotation(Tweet tweet) {
 		// On transforme ce tweet en Map
 		Map<String, Integer> tweetMap;
-		tweetMap = tweet.toMap();
+		tweetMap = nGrammeExtractor.extract(tweet.getText());
 		
 		// GERER LE CAS SI TWEETMAP EST VIDE???
 		
@@ -135,7 +138,4 @@ public class BayesClassification extends AbstractClassification {
 			return 2;
 		}
 	}
-	
-
-
 }
