@@ -22,40 +22,58 @@ public class TestClassification {
 		List<Tweet> tweetList = LaunchConfiguration.getTweetListFromCSV(args, 0);
 		
 		// Extraction des 3 listes de Tweet
-		List<Tweet> [] lists = splitKTweetList(tweetList, 3);
+		ArrayList<ArrayList<Tweet>> lists = splitKTweetList(tweetList, 3);
 		
 		double ea0, ea1, ea2;
 		
 		//Calcul de ea0
 		//Initialisation du classificateur
 		List<Tweet> l1Ul2 = new ArrayList();
-		l1Ul2.addAll(lists[1]);
-		l1Ul2.addAll(lists[2]);
+		l1Ul2.addAll(lists.get(1));
+		l1Ul2.addAll(lists.get(2));
 		AbstractClassification classificateur = LaunchConfiguration.getClassification(args, 2, new TweetsBase(l1Ul2, true));
 		ea0 = classifier(l1Ul2, classificateur);
 		
 		//Calcul de ea1
 		//Initialisation du classificateur
 		List<Tweet> l0Ul2 = new ArrayList();
-		l0Ul2.addAll(lists[0]);
-		l0Ul2.addAll(lists[2]);
+		l0Ul2.addAll(lists.get(0));
+		l0Ul2.addAll(lists.get(2));
 		classificateur = LaunchConfiguration.getClassification(args, 2, new TweetsBase(l0Ul2, true));
 		ea1 = classifier(l0Ul2, classificateur);
 		
 		//Calcul de ea2
 		//Initialisation du classificateur
 		List<Tweet> l0Ul1 = new ArrayList();
-		l0Ul1.addAll(lists[0]);
-		l0Ul1.addAll(lists[1]);
+		l0Ul1.addAll(lists.get(0));
+		l0Ul1.addAll(lists.get(1));
 		classificateur = LaunchConfiguration.getClassification(args, 2, new TweetsBase(l0Ul1, true));
 		ea2 = classifier(l0Ul1, classificateur);
 		
 		double e = (ea0 + ea1 + ea2) / 3;
 		System.out.println(e);
 	}
-	private static List<Tweet>[] splitKTweetList(List<Tweet> tweetList, int k){
-		
-return null;
+
+	private static ArrayList<ArrayList<Tweet>> splitKTweetList(List<Tweet> tweetList, int k){
+    	ArrayList<ArrayList<Tweet>> listOLists = new ArrayList<ArrayList<Tweet>>();
+    	
+    	for (int i = 0; i < k; i++) {
+        	listOLists.add(new ArrayList<Tweet>());
+    	}
+    	
+    	if (k > tweetList.size()) {
+            System.err.println("La tweetBase ne contient pas assez de tweets, choississez un k plus petit ou ajouter des tweets à la base");
+            System.exit(-1);
+        }
+    	else {
+    		 for (int i = 0; i < tweetList.size() - k + 1; i += k) {
+    			 for (int j = 0; j < k; j++) {
+        			 listOLists.get(j).add(tweetList.get(i+j));
+    			 }
+    		 }
+    	}
+    	
+        return listOLists;
 	}
 
 	private static double classifier(List<Tweet> tweetList, AbstractClassification classifier){
