@@ -53,9 +53,27 @@ public class TestClassification {
 		double e = (ea0 + ea1 + ea2) / 3;
 		System.out.println(e);
 	}
-	private static List<Tweet>[] splitKTweetList(List<Tweet> tweetList, int k){
-		
-		return null;
+	private static ArrayList<ArrayList<Tweet>> splitKTweetList(List<Tweet> tweetList, int k){
+    	ArrayList<ArrayList<Tweet>> listOLists = new ArrayList<ArrayList<Tweet>>();
+    	
+    	for (int i = 0; i < k; i++) {
+        	listOLists.add(new ArrayList<Tweet>());
+    	}
+    	
+    	if (k > tweetList.size()) {
+            System.err.println("La tweetBase ne contient pas assez de tweets, choississez un k plus petit ou ajouter des tweets à la base");
+            System.exit(-1);
+        }
+    	else {
+    		 for (int i = 0; i < tweetList.size() - k + 1; i += k) {
+    			 for (int j = 0; j < k; j++) {
+        			 listOLists.get(j).add(tweetList.get(i+j));
+    			 }
+    		 }
+    	}
+    	
+        return listOLists;
+	    
 	}
 
 	private static double classifier(List<Tweet> tweetList, AbstractClassification classifier){
