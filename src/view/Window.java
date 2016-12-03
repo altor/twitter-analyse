@@ -26,6 +26,7 @@ import javax.swing.JTextField;
 import controller.TweetsTableController;
 
 import twitter.TwitterAPI;
+import view.action.CleanAction;
 import view.action.ExportTweetsToCSVAction;
 import view.action.LoadToBaseAction;
 import view.action.SearchAction;
@@ -136,6 +137,8 @@ public class Window extends JFrame {
 		buttonsContainer.setLayout(new BoxLayout(buttonsContainer, BoxLayout.X_AXIS));
 		buttonsContainer
 			.add(new JButton(new ExportTweetsToCSVAction("Exporter les résultats en CSV", tweetsTableController)));
+		buttonsContainer
+			.add(new JButton(new CleanAction("Nettoyer Base", tweetsTableController)));
 		return buttonsContainer;
 	}
 	

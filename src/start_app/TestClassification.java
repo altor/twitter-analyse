@@ -55,7 +55,7 @@ public class TestClassification {
 	}
 	private static List<Tweet>[] splitKTweetList(List<Tweet> tweetList, int k){
 		
-		return null;
+return null;
 	}
 
 	private static double classifier(List<Tweet> tweetList, AbstractClassification classifier){

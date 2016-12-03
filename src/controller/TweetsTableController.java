@@ -58,7 +58,14 @@ public class TweetsTableController {
 		
 	}
 	
-	
+	/*
+	 * Netoie les tweet de la tweetBase
+	 */
+	public void cleanBase(){
+		for(Tweet tweet : tweetsBase)
+			tweet.clean(tweetCleaner);
+		tweetsBase.fireTableDataChanged();
+	}
 	
 	
 	public void loadToBase(){
@@ -66,7 +73,7 @@ public class TweetsTableController {
 			if(tweetsBase.contains(tweet.getId()))
 				System.out.println(tweet.getId() + " : Tweet déjà présent");
 			else if(tweet.getAnnotation() != -1){
-				tweet.clean(tweetCleaner);
+				//tweet.clean(tweetCleaner);
 				//classificator.setAnnotation(tweet);
 				tweetsBase.addTweet(tweet);
 			}
