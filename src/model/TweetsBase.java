@@ -51,7 +51,7 @@ public class TweetsBase extends AbstractTableModel implements Iterable<Tweet>{
 	
 	public TweetsBase(List<Tweet> tweetList, boolean b) {
 		tweetIds = new TreeSet<>();
-		tweetList = new ArrayList();
+		this.tweetList = new ArrayList();
 		
 	    for (Tweet tweet : tweetList) {
 	        addTweet(tweet);

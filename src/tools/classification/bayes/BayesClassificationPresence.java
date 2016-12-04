@@ -55,7 +55,7 @@ public class BayesClassificationPresence extends AbstractBayesClassification {
 		for(String word : tweetMap.keySet()) {
 			
 			// si word appartient aux mots neutres
-			if (this.positiveTweets.containsKey(word)) {
+			if (this.neutreTweets.containsKey(word)) {
 				neutralProbability *= this.neutreTweets.get(word)/this.nbNeutreWords;
 			}
 			else {

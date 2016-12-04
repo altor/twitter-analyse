@@ -28,7 +28,7 @@ public class TwitterAPI {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true).setOAuthConsumerKey(consumerKey).setOAuthConsumerSecret(consumerSecret)
 				.setOAuthAccessToken(accessToken).setOAuthAccessTokenSecret(accessTokenSecret)
-				.setHttpProxyHost("cache.univ-lille1.fr").setHttpProxyPort(3128)
+				//.setHttpProxyHost("cache.univ-lille1.fr").setHttpProxyPort(3128)
 				.setJSONStoreEnabled(true);
 
 		// Connexion à Twitter

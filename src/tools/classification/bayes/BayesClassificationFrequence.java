@@ -56,7 +56,8 @@ public class BayesClassificationFrequence extends AbstractBayesClassification {
 		
 		for(String word : tweetMap.keySet()) {
 			// si word appartient aux mots neutres
-			if (this.positiveTweets.containsKey(word)) {
+			if (this.neutreTweets.containsKey(word)) {
+
 				neutralProbability *= Math.pow(this.neutreTweets.get(word)/this.nbNeutreWords, tweetMap.get(word));
 			}
 			else {

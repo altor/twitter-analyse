@@ -31,24 +31,24 @@ public class TestClassification {
 		List<Tweet> l1Ul2 = new ArrayList();
 		l1Ul2.addAll(lists.get(1));
 		l1Ul2.addAll(lists.get(2));
-		AbstractClassification classificateur = LaunchConfiguration.getClassification(args, 2, new TweetsBase(l1Ul2, true));
-		ea0 = classifier(l1Ul2, classificateur);
+		AbstractClassification classificateur = LaunchConfiguration.getClassification(args, 1, new TweetsBase(l1Ul2, true));
+		ea0 = classifier(lists.get(0), classificateur);
 		
 		//Calcul de ea1
 		//Initialisation du classificateur
 		List<Tweet> l0Ul2 = new ArrayList();
 		l0Ul2.addAll(lists.get(0));
 		l0Ul2.addAll(lists.get(2));
-		classificateur = LaunchConfiguration.getClassification(args, 2, new TweetsBase(l0Ul2, true));
-		ea1 = classifier(l0Ul2, classificateur);
+		classificateur = LaunchConfiguration.getClassification(args, 1, new TweetsBase(l0Ul2, true));
+		ea1 = classifier(lists.get(1), classificateur);
 		
 		//Calcul de ea2
 		//Initialisation du classificateur
 		List<Tweet> l0Ul1 = new ArrayList();
 		l0Ul1.addAll(lists.get(0));
 		l0Ul1.addAll(lists.get(1));
-		classificateur = LaunchConfiguration.getClassification(args, 2, new TweetsBase(l0Ul1, true));
-		ea2 = classifier(l0Ul1, classificateur);
+		classificateur = LaunchConfiguration.getClassification(args, 1, new TweetsBase(l0Ul1, true));
+		ea2 = classifier(lists.get(2), classificateur);
 		
 		double e = (ea0 + ea1 + ea2) / 3;
 		System.out.println(e);
@@ -78,22 +78,22 @@ public class TestClassification {
 
 	private static double classifier(List<Tweet> tweetList, AbstractClassification classifier){
 
-		int  nb_Faux =0;
+		double  nb_Faux =0;
 		double taux =0;
 		for (Tweet tweet :tweetList){
 			int annotation = tweet.getAnnotation();
 			int classifierAnnotation = classifier.getAnnotation(tweet);
 
-
 			if(annotation !=classifierAnnotation){
-
 				nb_Faux++;
 			}
+
 		}
 
 		int nb_total=tweetList.size();
 
-		taux = nb_Faux /nb_total; 			
+		taux = nb_Faux /nb_total; 	
+
 		return taux;
 
 	}
