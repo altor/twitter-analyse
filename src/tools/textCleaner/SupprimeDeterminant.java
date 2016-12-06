@@ -21,18 +21,18 @@ public class SupprimeDeterminant extends CleanMethod{
 
 		String nomDuFichier = "determinant.txt";
 		tableau =	KeyWordExtractor.getListeMots(nomDuFichier, "US");
-		
+
 	}
 
 	@Override
 	public String clean(String clean){
 		for (int i = 0; i < tableau.length; i++) {
 			Pattern pattern = Pattern.compile ("(\\p{Blank}|^)"+tableau[i]+"(\\p{Blank}|$)");
-						Matcher matcher = pattern.matcher(clean);
+			Matcher matcher = pattern.matcher(clean);
 			clean = matcher.replaceAll(" ");
 		}		
-	return clean; 		
-	
+		return clean; 		
+
 }
 }
 
