@@ -153,10 +153,22 @@ public class Window extends JFrame {
 		
 		
 		panel.add(new JLabel("EN CONSTRUCTION"));
-		panel.add(new RatePanel(tweetsTableController));		
+		JPanel panel2 = new JPanel();
+		panel2.setLayout(new GridLayout(9, 3));
+		panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
+		panel2.add(new RatePanel(tweetsTableController));		
+		panel2.add(ratedTablePane());
+		
+		panel.add(panel2);
 		return panel;
 	}
 	
-
+	// Création du tableau de visualiation des tweets trouvés
+		private JScrollPane ratedTablePane(){
+			RatedTweetsTableView tweetstableView = new RatedTweetsTableView(tweetsTableController);
+			JScrollPane tableContainer = new JScrollPane(tweetstableView, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+					JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			return tableContainer;
+		}
 	
 }

@@ -123,9 +123,6 @@ public class TweetsTableController {
 		return tweetsBase;
 	}
 
-
-
-
 	public TweetTableClassifier getTableClassifier() {
 		return this.tweetsTableClassifier;
 	}
