@@ -151,10 +151,12 @@ public class Window extends JFrame {
 		panel.setLayout(new GridLayout(9, 3));
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		
-		panel.add(new JLabel("EN CONSTRUCTION"));
 		
+		panel.add(new JLabel("EN CONSTRUCTION"));
+		panel.add(new RatePanel(tweetsTableController));		
 		return panel;
 	}
+	
 
 	
 }

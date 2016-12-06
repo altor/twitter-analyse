@@ -122,4 +122,11 @@ public class TweetsTableController {
 	public TableModel getBaseModel() {
 		return tweetsBase;
 	}
+
+
+
+
+	public TweetTableClassifier getTableClassifier() {
+		return this.tweetsTableClassifier;
+	}
 }
