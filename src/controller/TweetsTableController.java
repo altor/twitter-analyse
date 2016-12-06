@@ -13,9 +13,7 @@ import twitter.Tweet;
 import model.TweetsBase;
 import model.TweetsTableModel;
 import tools.classification.AbstractClassification;
-import tools.textCleaner.ReplaceStringCleanMethod;
-import tools.textCleaner.SupprimeDeterminant;
-import tools.textCleaner.TextCleaner;
+import tools.textCleaner.*;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
 
 import com.opencsv.CSVReader;
@@ -41,6 +39,9 @@ public class TweetsTableController {
 		this.tweetsTableModel = new TweetsTableModel();
 
 		tweetCleaner = new TextCleaner();
+		// passage en minusculej
+		tweetCleaner.add(new ToLowerCaseCleanMethod());
+		// supression des déterminant, pronom, conjonction, ...
 		tweetCleaner.add(new SupprimeDeterminant());
 		// supression des doubles espace et espaces insécables
 		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0", " "));
@@ -58,7 +59,14 @@ public class TweetsTableController {
 		
 	}
 	
-	
+	/*
+	 * Netoie les tweet de la tweetBase
+	 */
+	public void cleanBase(){
+		for(Tweet tweet : tweetsBase)
+			tweet.clean(tweetCleaner);
+		tweetsBase.fireTableDataChanged();
+	}
 	
 	
 	public void loadToBase(){
@@ -66,7 +74,7 @@ public class TweetsTableController {
 			if(tweetsBase.contains(tweet.getId()))
 				System.out.println(tweet.getId() + " : Tweet déjà présent");
 			else if(tweet.getAnnotation() != -1){
-				tweet.clean(tweetCleaner);
+				//tweet.clean(tweetCleaner);
 				//classificator.setAnnotation(tweet);
 				tweetsBase.addTweet(tweet);
 			}
