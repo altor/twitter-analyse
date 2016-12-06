@@ -15,16 +15,16 @@ public class BayesClassificationPresence extends AbstractBayesClassification {
 	// correspond au TP1
 
 	@Override
-	public int getPositiveProbability(Map<String, Integer> tweetMap) {
-		int positiveProbability = 1;
+	public double getPositiveProbability(Map<String, Integer> tweetMap) {
+		double positiveProbability = 1;
 		
 		for(String word : tweetMap.keySet()) {
 			// si word appartient aux mots positifs
 			if (this.positiveTweets.containsKey(word)) {
-				positiveProbability *= this.positiveTweets.get(word)/this.nbPositiveWords;
+				positiveProbability *= ((double)(this.positiveTweets.get(word)) + 1)/(2 * this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords);
 			}
 			else {
-				positiveProbability *= 1 / (this.nbPositiveWords + (this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords));
+				positiveProbability *= 1.0 / (this.nbPositiveWords + (this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords));
 			}
 		}
 		
@@ -32,16 +32,16 @@ public class BayesClassificationPresence extends AbstractBayesClassification {
 	}
 
 	@Override
-	public int getNegativeProbability(Map<String, Integer> tweetMap) {
-		int negativeProbability = 1;
+	public double getNegativeProbability(Map<String, Integer> tweetMap) {
+		double negativeProbability = 1;
 		
 		for(String word : tweetMap.keySet()) {	
 			// si word appartient aux mots negativs
 			if (this.negativeTweets.containsKey(word)) {
-				negativeProbability *= this.negativeTweets.get(word)/this.nbNegativeWords;
+				negativeProbability *= ((double)(this.negativeTweets.get(word)) + 1.0)/(this.nbPositiveWords + this.nbNegativeWords * 2 + this.nbNeutreWords);
 			}
 			else {
-				negativeProbability *= 1 / (this.nbNegativeWords + (this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords));
+				negativeProbability *= 1.0 / (this.nbNegativeWords + (this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords));
 			}
 		}
 		
@@ -49,17 +49,17 @@ public class BayesClassificationPresence extends AbstractBayesClassification {
 	}
 
 	@Override
-	public int getNeutralProbability(Map<String, Integer> tweetMap) {
-		int neutralProbability = 1;
+	public double getNeutralProbability(Map<String, Integer> tweetMap) {
+		double neutralProbability = 1;
 		
 		for(String word : tweetMap.keySet()) {
 			
 			// si word appartient aux mots neutres
 			if (this.neutreTweets.containsKey(word)) {
-				neutralProbability *= this.neutreTweets.get(word)/this.nbNeutreWords;
+				neutralProbability *= ((double)(this.neutreTweets.get(word)) + 1.0)/(this.nbPositiveWords + this.nbNegativeWords + 2 * this.nbNeutreWords);
 			}
 			else {
-				neutralProbability *= 1 / (this.nbNeutreWords + (this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords));
+				neutralProbability *= 1.0 / (this.nbNeutreWords + (this.nbPositiveWords + this.nbNegativeWords + this.nbNeutreWords));
 			}
 		}
 		

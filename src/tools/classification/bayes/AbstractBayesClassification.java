@@ -80,11 +80,11 @@ public abstract class AbstractBayesClassification extends AbstractClassification
 		return tweetsMap;
 	}
 	
-	public abstract int getPositiveProbability(Map<String, Integer> tweetMap);
+	public abstract double getPositiveProbability(Map<String, Integer> tweetMap);
 	
-	public abstract int getNegativeProbability(Map<String, Integer> tweetMap);
+	public abstract double getNegativeProbability(Map<String, Integer> tweetMap);
 	
-	public abstract int getNeutralProbability(Map<String, Integer> tweetMap);
+	public abstract double getNeutralProbability(Map<String, Integer> tweetMap);
 	
 	@Override
 	public int getAnnotation(Tweet tweet) {
@@ -99,13 +99,13 @@ public abstract class AbstractBayesClassification extends AbstractClassification
 		double neutralProbability;
 		
 		positiveProbability = getPositiveProbability(tweetMap);
-		positiveProbability *= this.nbPositiveTweets / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);
+		positiveProbability *= ((double)(this.nbPositiveTweets)) / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);
 				
 		negativeProbability = getNegativeProbability(tweetMap);
-		negativeProbability *= this.nbNegativeTweets / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);
+		negativeProbability *= ((double)(this.nbNegativeTweets)) / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);
 		
 		neutralProbability = getNeutralProbability(tweetMap);
-		neutralProbability *= this.nbNeutreTweets / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);		
+		neutralProbability *= ((double)(this.nbNeutreTweets)) / (this.nbNegativeTweets + this.nbNeutreTweets + this.nbPositiveTweets);		
 		
 		
 		if (negativeProbability > positiveProbability && negativeProbability > neutralProbability) {
