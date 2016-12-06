@@ -153,7 +153,6 @@ public class Window extends JFrame {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		
 		
-		panel.add(new JLabel("EN CONSTRUCTION"));
 		panel.add(requesclassificationJPanel());
 
 		JPanel panel2 = new JPanel();

@@ -38,7 +38,7 @@ public class TweetsTableController {
 		this.classificator = classificator;
 
 		this.tweetsTableModel = new TweetsTableModel();
-		this.tweetsTableClassifier = new TweetTableClassifier();
+		this.tweetsTableClassifier = new TweetTableClassifier(classificator);
 
 		tweetCleaner = new TextCleaner();
 		// passage en minusculej
@@ -62,7 +62,9 @@ public class TweetsTableController {
 	}
 	
 	
-	
+	public AbstractClassification getClassificator(){
+		return classificator;
+	}
 	
 	/*
 	 * Netoie les tweet de la tweetBase

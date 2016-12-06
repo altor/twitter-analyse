@@ -36,6 +36,8 @@ public class SearchActionclassifier extends AbstractAction {
 		try {
 			List<Tweet> tweetList = this.twitterAPI.getTweets(this.requestField.getText());
 			//.updateTableModel(tweetList);
+			for(Tweet t : tweetList)
+				tweetsTableController.getClassificator().setAnnotation(t);
 			tweetsTableController.updateTableClassifier(tweetList);
 
 		} catch (Exception e1) {

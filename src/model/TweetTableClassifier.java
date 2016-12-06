@@ -1,9 +1,14 @@
 package model;
 
+import java.util.List;
+
+import tools.classification.AbstractClassification;
 import twitter.Tweet;
 
 public class TweetTableClassifier extends TweetsTableModel {
-	public TweetTableClassifier(){
+	protected AbstractClassification classifier;
+	
+	public TweetTableClassifier(AbstractClassification classifier){
 		super();
 	}
 
@@ -26,7 +31,7 @@ public class TweetTableClassifier extends TweetsTableModel {
 		double nb_total= tweetList.size();
 		tauxPositif=nbPositif/nb_total;
 	
-		return tauxPositif;
+		return tauxPositif * 100;
 	}
 	
 	//Taux des tweets negatifs
@@ -50,7 +55,7 @@ public class TweetTableClassifier extends TweetsTableModel {
 		double nb_total= tweetList.size();
 		taux_negatif=nbnegatif/nb_total;
 	
-		return taux_negatif;
+		return taux_negatif * 100;
 		
 	}
 	
@@ -72,16 +77,8 @@ public class TweetTableClassifier extends TweetsTableModel {
 		double nb_total= tweetList.size();
 		taux_neutre=nb_neutre/nb_total;
 	
-		return taux_neutre;
+		return taux_neutre * 100;
 	
 	}
-	
-	public void classify(){
-		
-		
-		// fin de la fonction pour raffraichir la vue
-		fireTableDataChanged();
-	}
-	
 	
 }

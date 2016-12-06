@@ -24,18 +24,20 @@ public class RatePanel extends JPanel implements TableModelListener{
 		
 		this.setLayout(new GridLayout(9, 3));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		this.add(new JLabel("Tweets positifs : " + table.getPositivePercent()));
-		this.add(new JLabel("Tweets negatifs : " + table.getNegativePercent()));
-		this.add(new JLabel("Tweets neutres : " + table.getNeutralPercent()));
+		this.add(new JLabel("Tweets positifs : " + table.getPositivePercent()+ " %"));
+		this.add(new JLabel("Tweets negatifs : " + table.getNegativePercent()+ " %"));
+		this.add(new JLabel("Tweets neutres : " + table.getNeutralPercent()+ " %"));
 		
 	}
 	
 	public void tableChanged(TableModelEvent e){
 		
-		
+		System.out.println("toto");
 		
 		this.removeAll();
-		
+		this.add(new JLabel("Tweets positifs : " + table.getPositivePercent() + " %"));
+		this.add(new JLabel("Tweets negatifs : " + table.getNegativePercent()+ " %"));
+		this.add(new JLabel("Tweets neutres : " + table.getNeutralPercent()+ " %"));
 
 	}
 }
