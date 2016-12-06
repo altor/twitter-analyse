@@ -55,6 +55,8 @@ public class Window extends JFrame {
 		
 		tabs.addTab("Request", requestTab());
 		tabs.addTab("tweet Base", tweetBaseTab());
+		tabs.addTab("classifier", classifierTab());
+
 
 		
 		this.getContentPane().add(tabs);
@@ -141,5 +143,18 @@ public class Window extends JFrame {
 			.add(new JButton(new CleanAction("Nettoyer Base", tweetsTableController)));
 		return buttonsContainer;
 	}
+	
+	// METHODES DE CREATION DU 3éme onglets
+	private JPanel classifierTab(){
+		JPanel panel = new JPanel();
+		
+		panel.setLayout(new GridLayout(9, 3));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+		
+		panel.add(new JLabel("EN CONSTRUCTION"));
+		
+		return panel;
+	}
+
 	
 }

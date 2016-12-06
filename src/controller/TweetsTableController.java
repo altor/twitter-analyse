@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.table.TableModel;
 
 import twitter.Tweet;
-
+import model.TweetTableClassifier;
 import model.TweetsBase;
 import model.TweetsTableModel;
 import tools.classification.AbstractClassification;
@@ -24,6 +24,7 @@ public class TweetsTableController {
 
 	
 	protected TweetsTableModel tweetsTableModel;
+	protected TweetTableClassifier tweetsTableClassifier;
 	protected TweetsBase tweetsBase;
 	protected String csvFileName;
 	protected TextCleaner tweetCleaner;
@@ -37,6 +38,7 @@ public class TweetsTableController {
 		this.classificator = classificator;
 
 		this.tweetsTableModel = new TweetsTableModel();
+		this.tweetsTableClassifier = new TweetTableClassifier();
 
 		tweetCleaner = new TextCleaner();
 		// passage en minusculej
@@ -58,6 +60,9 @@ public class TweetsTableController {
 		tweetCleaner.add(new ReplaceStringCleanMethod("[-#@$€\n()0-9+&@/%?=~_!:,\\.;\"*><^…]|RT", ""));
 		
 	}
+	
+	
+	
 	
 	/*
 	 * Netoie les tweet de la tweetBase
