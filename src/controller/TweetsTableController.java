@@ -129,4 +129,25 @@ public class TweetsTableController {
 	public TweetTableClassifier getTableClassifier() {
 		return this.tweetsTableClassifier;
 	}
+
+
+
+
+	public void updateTableClassifier(List<Tweet> tweetList) {
+    List<Tweet> validTweetList = new ArrayList();
+		
+		for(Tweet tweet : tweetList){
+			if(tweet.containsValidEmoticone())
+				if(tweet.isFrenchTweet())
+					if(!tweet.isRetweet())
+						validTweetList.add(tweet);
+					else
+						System.out.println(tweet.getId() + " :  RT");
+				else
+					    System.out.println(tweet.getId() + " : Mauvaise Langue");
+						
+		}
+		tweetsTableClassifier.updateTableModel(validTweetList);
+				
+	}
 }

@@ -30,6 +30,7 @@ import view.action.CleanAction;
 import view.action.ExportTweetsToCSVAction;
 import view.action.LoadToBaseAction;
 import view.action.SearchAction;
+import view.action.SearchActionclassifier;
 
 
 public class Window extends JFrame {
@@ -153,10 +154,19 @@ public class Window extends JFrame {
 		
 		
 		panel.add(new JLabel("EN CONSTRUCTION"));
+		panel.add(requesclassificationJPanel());
 		panel.add(new RatePanel(tweetsTableController));		
 		return panel;
 	}
 	
-
-	
+	private JPanel requesclassificationJPanel(){
+		JPanel researchContainer = new JPanel();
+		researchContainer.setLayout(new BoxLayout(researchContainer, BoxLayout.X_AXIS));
+		researchContainer.add(new JLabel("Rechercher"));
+		JTextField jf = new JTextField();
+		researchContainer.add(jf);
+		//researchContainer.add(new JButton(new SearchAction("Rechercher", jf, twitterAPI, tweetsTableController)));
+		researchContainer.add(new JButton(new SearchActionclassifier("Rechercher", jf, twitterAPI, tweetsTableController)));
+		return researchContainer;
+	}		
 }

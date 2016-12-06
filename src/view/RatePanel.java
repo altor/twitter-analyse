@@ -38,6 +38,4 @@ public class RatePanel extends JPanel implements TableModelListener{
 		
 
 	}
-
-
 }

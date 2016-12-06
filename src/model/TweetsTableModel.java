@@ -122,4 +122,9 @@ public class TweetsTableModel extends AbstractTableModel implements Iterable<Twe
 	public String getColumnName(int columnIndex) {
 		return this.columnName[columnIndex];
 	}
+
+	public void updateTableClassifier(List<Tweet> validTweetList) {
+		// TODO Auto-generated method stub
+		
+	}
 }
