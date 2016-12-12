@@ -162,6 +162,7 @@ public class Window extends JFrame {
 		panel2.add(ratedTablePane());
 		
 		panel.add(panel2);
+		panel.add(new ChartPane(tweetsTableController));
 		return panel;
 	}
 	

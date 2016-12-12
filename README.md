@@ -11,3 +11,4 @@ author: D'AZEMAR Arthur
 - [opencsv](https://sourceforge.net/projects/opencsv/) : bibliothèque de manipulation de CSV
 - [commons-lang3](https://commons.apache.org/proper/commons-lang/download_lang.cgi) : dépendance requise par opencsv
 - [simmetrics](http://sourceforge.net/projects/simmetrics/) : bibliothèque de distance entre chaine de caractère
+- [JFreeChart](https://sourceforge.net/projects/jfreechart/files/) : bibliothèqye de génération de graphique
