@@ -46,7 +46,7 @@ public class TestClassification {
 		classificateur = LaunchConfiguration.getClassification(args, 1, new TweetsBase(l0Ul1, true));
 		ea2 = classifier(lists.get(2), classificateur);
 		
-		double e = (ea0 + ea1 + ea2) / 3;
+		double e = ((ea0 + ea1 + ea2) / 3) * 100;
 		System.out.println(e);
 
 	}

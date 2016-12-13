@@ -45,6 +45,8 @@ public class TweetsTableController {
 		tweetCleaner.add(new ToLowerCaseCleanMethod());
 		// supression des déterminant, pronom, conjonction, ...
 		tweetCleaner.add(new SupprimeDeterminant());
+		// supression mot de - 3 lettres
+		//tweetCleaner.add(new ReplaceStringCleanMethod("(\\p{Space}|^)\\w?\\w?\\w?(\\p{Space}|$)", " "));
 		// supression des doubles espace et espaces insécables
 		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0", " "));
 		// supression des références à un utilisateur
@@ -56,7 +58,7 @@ public class TweetsTableController {
 		tweetCleaner.add(new ReplaceStringCleanMethod(" $|^ ", ""));
 		// supression des doubles espace et espaces insécables
 		tweetCleaner.add(new ReplaceStringCleanMethod("  |\u00A0", " "));
-		//supression des sommes avec $ et €
+		//supression des caractère spéciaux
 		tweetCleaner.add(new ReplaceStringCleanMethod("[-#@$€\n()0-9+&@/%?=~_!:,\\.;\"*><^…]|RT", ""));
 		
 	}
@@ -138,8 +140,10 @@ public class TweetsTableController {
 		for(Tweet tweet : tweetList){
 			if(tweet.containsValidEmoticone())
 				if(tweet.isFrenchTweet())
-					if(!tweet.isRetweet())
+					if(!tweet.isRetweet()){
+						tweet.clean(tweetCleaner);
 						validTweetList.add(tweet);
+					}
 					else
 						System.out.println(tweet.getId() + " :  RT");
 				else

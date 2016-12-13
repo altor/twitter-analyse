@@ -22,6 +22,7 @@ import tools.nGrammeExtractor.UniAndBiGrammeExtractor;
 import tools.nGrammeExtractor.UniGrammeExtractor;
 import twitter.Tweet;
 import twitter.TwitterAPI;
+import uk.ac.shef.wit.simmetrics.similaritymetrics.JaccardSimilarity;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.Levenshtein;
 
 public class LaunchConfiguration {
@@ -77,6 +78,8 @@ public class LaunchConfiguration {
 			int k = Integer.parseInt(args[classificatorRank + 1]);
 			if(args[classificatorRank + 2].equals("levenshtein"))
 				return new KnnClassification(new AbstractDistance(new Levenshtein()), tweetsBase, k);
+			if(args[classificatorRank + 2].equals("jaccard"))
+				return new KnnClassification(new AbstractDistance(new JaccardSimilarity()), tweetsBase, k);
 		}
 		else if(args[classificatorRank].equals("bayes")){
 			if(args.length != classificatorRank + 3){

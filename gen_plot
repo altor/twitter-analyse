@@ -1,0 +1,69 @@
+set yrange [20:75]
+set boxwidth 0.5
+set style fill solid
+set ylabel "Taux erreur"
+
+# knn normal
+plot "resultat.dat" index 1 using 1:3:xtic(2) with boxes title "levenshtein"
+replot "resultat.dat" index 2 using 1:3 with boxes title "jaccard"
+set terminal png  
+set output "knn_normal.png"
+replot
+set terminal x11
+
+# bayes normal
+set label at graph 0.60,0.85 '0 : bigramme frequence'
+set label at graph 0.60,0.80 '1 : bigramme presence'
+set label at graph 0.60,0.75 '2 : uni/biGramme frequence'
+set label at graph 0.60,0.70 '3 : uni/biGramme presence'
+set label at graph 0.60,0.65 '4 : unigramme frequence'
+set label at graph 0.60,0.60 '5 : unigramme frequence'
+plot "resultat.dat" index 3 using 1:3:xtic(1) with boxes title "bayes"
+set terminal png  
+set output "bayes_normal.png"
+replot
+set terminal x11
+
+# knn 3_l
+unset label
+plot "resultat.dat" index 5 using 1:3:xtic(2) with boxes title "levenshtein"
+replot "resultat.dat" index 6 using 1:3 with boxes title "jaccard"
+set terminal png
+set output "knn_3_l.png"
+replot
+set terminal x11
+
+# bayes 3_l
+set label at graph 0.60,0.85 '0 : bigramme frequence'
+set label at graph 0.60,0.80 '1 : bigramme presence'
+set label at graph 0.60,0.75 '2 : uni/biGramme frequence'
+set label at graph 0.60,0.70 '3 : uni/biGramme presence'
+set label at graph 0.60,0.65 '4 : unigramme frequence'
+set label at graph 0.60,0.60 '5 : unigramme frequence'
+plot "resultat.dat" index 7 using 1:3:xtic(1) with boxes title "bayes"
+set terminal png  
+set output "bayes_3_l.png"
+replot
+set terminal x11
+
+# knn determinant
+unset label
+plot "resultat.dat" index 9 using 1:3:xtic(2) with boxes title "levenshtein"
+replot "resultat.dat" index 10 using 1:3 with boxes title "jaccard"
+set terminal png
+set output "knn_determinant.png"
+replot
+set terminal x11
+
+# bayes determinant
+set label at graph 0.60,0.85 '0 : bigramme frequence'
+set label at graph 0.60,0.80 '1 : bigramme presence'
+set label at graph 0.60,0.75 '2 : uni/biGramme frequence'
+set label at graph 0.60,0.70 '3 : uni/biGramme presence'
+set label at graph 0.60,0.65 '4 : unigramme frequence'
+set label at graph 0.60,0.60 '5 : unigramme frequence'
+plot "resultat.dat" index 11 using 1:3:xtic(1) with boxes title "bayes"
+set terminal png  
+set output "bayes_determinant.png"
+replot
+set terminal x11
